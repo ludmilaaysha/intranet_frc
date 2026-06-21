@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luisa | Intranet para FRC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='translate(18 4)'%3E%3Cpath d='M11.5557 40H7.0498V23.5068H6.87402L0 27.8164V22.1875L7.43066 17.4824H11.5557V40ZM11.582 0.00195312V3.27246C11.5205 3.2692 11.4579 3.2666 11.3945 3.2666C10.6779 3.26663 10.0749 3.47039 9.58594 3.87891C9.10366 4.2875 8.73811 4.8436 8.49023 5.54688C8.24906 6.25031 8.12891 7.0515 8.12891 7.94922C8.12892 8.84676 8.24913 9.64725 8.49023 10.3506C8.73809 11.054 9.10365 11.6099 9.58594 12.0186C10.075 12.4205 10.6778 12.622 11.3945 12.6221C11.458 12.6221 11.5205 12.6175 11.582 12.6143V15.9355C11.5135 15.9369 11.4444 15.9385 11.375 15.9385C9.81421 15.9385 8.46401 15.6065 7.3252 14.9434C6.193 14.2734 5.31849 13.3419 4.70215 12.1494C4.08586 10.9503 3.77738 9.56041 3.77734 7.97949C3.77734 6.38503 4.0858 4.99132 4.70215 3.79883C5.31849 2.59966 6.19301 1.66811 7.3252 1.00488C8.464 0.335118 9.81424 0 11.375 0C11.4444 2.9659e-06 11.5135 0.000625094 11.582 0.00195312Z' fill='%2337C9FF'/%3E%3C/g%3E%3C/svg%3E">
+  <style>
+    :root {
+        --blue-dk: #0133E1;
+        --blue-md: #0162EF;
+        --blue-lg: #37C9FF;
+        --blue-transparent: rgba(1,98,239,0.08);
+        --neutral-0: #021045;
+        --neutral-1: #FEFEFE;
+
+        --spacing-base: 8px;
+        --spacing-2x: calc(var(--spacing-base)*2);
+        --spacing-3x: calc(var(--spacing-base)*3);
+        --spacing-4x: calc(var(--spacing-base)*4);
+        --spacing-5x: calc(var(--spacing-base)*5);
+        --spacing-6x: calc(var(--spacing-base)*6);
+        --spacing-7x: calc(var(--spacing-base)*7);
+        --spacing-8x: calc(var(--spacing-base)*8);
+        --spacing-half: calc(var(--spacing-base)/2);
+        --spacing-2xh: calc((var(--spacing-base)*3)/2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--neutral-1); color: var(--neutral-0); overflow-x: hidden; }
+
+    h1 {
+        font-size: 4rem;
+        font-style: normal; 
+        font-weight: 700;
+        line-height: normal;    
+    }
+
+    h2 {
+        font-size: 3rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    h3 {
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+    h4 {
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    h5 {
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    h6 {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+
+    }
+    p, ul {
+        font-size: 1rem;
+        /* font-style: normal; */
+        font-weight: 200;
+        line-height: 1.7;
+    }
+    
+    li {
+        margin-left: 2rem;
+    }
+
+    b { font-weight: 700; }
+    
+    div {
+        max-width: 1440px;
+    }
+
+    /* NAVIGATION */
+    .nav {
+        position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+        width: 100%; display: flex; align-items: center;
+        justify-content: space-between; padding: var(--spacing-2x) var(--spacing-5x); z-index: 100;
+        transition: all 0.3s ease;
+        /* background: var(--blue-dk); */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .nav.light {
+        /* background: var(--neutral-1); */
+        backdrop-filter: blur(10px);
+    }
+    .nav.light .logo-text,
+    .nav.light .nav-tab {
+        color: var(--neutral-0);
+    }
+    .nav.light .nav-tab:hover {
+        background: rgba(0,0,0,0.08);
+    }
+    .logo { display: flex; align-items: flex-end; gap: var(--spacing-base); flex-shrink: 0; }
+    .logo-icon { width: 12px; height: 40px; }
+    .logo-text { font-size: 2rem; color: var(--neutral-1); line-height: 1; white-space: nowrap; }
+    .logo-text strong { font-weight: 700; }
+    .nav-menu { display: flex; gap: var(--spacing-half); align-items: center; }
+    .nav-tab {
+      padding: 8px var(--spacing-2x); font-weight: 700; font-size: 16px; color: var(--neutral-1);
+      text-decoration: none; border-radius: 6px; transition: background 0.2s;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,0.12); }
+    .nav-btn {
+      display: flex; align-items: center; gap: 8px; padding: 12px var(--spacing-2x);
+      background: var(--blue-md); border-radius: 8px; font-weight: 600; font-size: 16px;
+      color: var(--neutral-1); cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .nav-btn:hover { background: var(--blue-dk); }
+
+    /* HERO */
+    .hero {
+      width: 100%;
+      background: var(--blue-dk) url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 1440 710' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-34.9 -21.355 30.8 -24.198 1291.5 649.33)'%3E%3Cstop stop-color='%230162ef' offset='0'/%3E%3Cstop stop-color='%230133e1' offset='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E") center / cover;
+    }
+    .hero-inner {
+      display: flex; align-items: center; padding-left: var(--spacing-8x);
+      gap: var(--spacing-6x); max-width: 1440px; margin: 0 auto;
+    }
+    .hero-content { flex: 1; display: flex; flex-direction: column; gap: var(--spacing-4x); min-width: 0; padding-block: 120px; margin-top: var(--spacing-4x); }
+    .hero-title { color: var(--neutral-1); }
+    .hero-subtitle { font-size: 24px; color: var(--neutral-1); line-height: 1.45; }
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: var(--spacing-base); padding: var(--spacing-2x) var(--spacing-3x);
+      background: var(--blue-lg); border-radius: var(--spacing-base); font-size: 16px; font-weight: 600;
+      color: var(--neutral-0); cursor: pointer; border: none; width: fit-content;
+      font-family: 'Inter', sans-serif; transition: background 0.2s;
+    }
+    .hero-btn:hover { background: var(--blue-lg); }
+    .hero-binary { width: 40%; flex-shrink: 0; display: flex; align-items: center; overflow: hidden; }
+    .binary-text {
+      font-size: 94px; font-weight: 600; text-align: center; word-break: break-all;
+      background: linear-gradient(-86.46deg, var(--blue-lg) 6%, var(--blue-dk) 96%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.1;
+    }
+
+    /* REPORT */
+    .report {
+        display: flex;
+        max-width: 1440px;
+        padding: var(--spacing-8x);
+        gap: var(--spacing-8x);
+        position: relative; 
+        margin: 0 auto; 
+        text-align: justify;
+    }
+    .report-inner {  display: flex; flex-direction: column; gap: 24px; }
+
+    .report nav {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        flex-shrink: 0;
+        gap: var(--spacing-base);
+        padding: var(--spacing-2x);
+        position: sticky;
+        top: 96px;
+        align-self: flex-start;
+        max-height: calc(100vh - 128px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #d9d9d9 transparent;
+    }
+    .report-nav::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .report-nav::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .report-nav::-webkit-scrollbar-thumb {
+        background: #d9d9d9;
+        border-radius: 999px;
+    }
+
+    .report-nav::-webkit-scrollbar-thumb:hover {
+        background: #c4c4c4;
+    }
+    .report-nav-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        border-left: 2px solid rgba(1,98,239,0.12);
+    }
+
+    .report-nav-item a {
+        display: block;
+        padding: 6px 0 6px var(--spacing-2x);
+        margin-left: -2px;
+        border-left: 2px solid transparent;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--neutral-0);
+        opacity: 0.55;
+        text-decoration: none;
+        transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .report-nav-item.sub a {
+        padding-left: calc(var(--spacing-2x) + var(--spacing-3x));
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .report-nav-item a:hover {
+        opacity: 1;
+        color: var(--blue-md);
+    }
+
+    .report-nav-item a.active {
+        opacity: 1;
+        color: var(--blue-md);
+        border-left-color: var(--blue-md);
+        font-weight: 700;
+    }
+
+    .report p {
+        text-indent: 2em;
+    }
+
+    .report h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5rem; }
+    .report h3, h4 { margin-top: 1rem; }
+    .report p { margin-bottom: 2rem; }
+
+    /* ICONS */
+    .material-symbols-rounded {
+      font-family: 'Material Symbols Rounded', sans-serif;
+      font-size: 16px; font-variation-settings: 'FILL' 0,'GRAD' 0,'opsz' 24;
+      font-weight: 600; line-height: 1; user-select: none;
+    }
+
+    .report-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .hero-inner, .explore, .members-section, .report-section { padding-left: 60px; padding-right: 60px; }
+      .hero-binary { width: 300px; }
+      .binary-text { font-size: 60px; }
+    }
+    @media (max-width: 960px) {
+      .hero-inner { flex-direction: column; padding-top: 100px; padding-left: 40px; padding-right: 40px; padding-bottom: 60px; }
+      .hero-binary { width: 100%; height: auto; }
+      .hero-subtitle { font-size: 18px; }
+      .binary-text { font-size: 48px; }
+      .explore, .members-section, .report-section { padding: 48px 40px; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .card-span-2, .card-span-3 { grid-column: span 2; }
+      .nav-menu { display: none; }
+      .nav { padding: 16px 24px; }
+    }
+    @media (max-width: 640px) {
+      .hero-inner { padding: 90px 20px 48px; }
+      .explore, .members-section, .report-section { padding: 40px 20px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .card-span-2, .card-span-3 { grid-column: span 1; }
+      .member-card { width: 100%; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-text"><strong>Luisa</strong>Terabit</div>
+    </div>
+    <div class="nav-menu">
+      <a class="nav-tab" href="#inicio">Início</a>
+      <a class="nav-tab" href="#dados-membro">Dados do membro</a>
+      <a class="nav-tab" href="#dificuldades">Dificuldades</a>
+      <a class="nav-tab" href="#contribuicoes">Contribuições</a>
+      <a class="nav-tab" href="#opiniao">Opinião</a>
+    </div>
+    <button class="nav-btn" onclick="">
+      <span class="material-symbols-rounded">web</span>
+      Página do projeto
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">Olá! Bem-vindo(a).</h1>
+        <p class="hero-subtitle">Sou Luisa. Explore minhas contribuições, dificuldades e opinião sobre a execução do trabalho de Intranet.</p>
+        <button class="hero-btn" onclick="goto('relatorio')">
+          <span class="material-symbols-rounded">article</span>
+          Ver relatório pessoal
+        </button>
+      </div>
+      <div class="hero-binary">
+        <p class="binary-text">Luisa de Souza Ferreira 232014807</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Report -->
+    <div class="report">
+    <section class="report-section" id="relatorio">
+      <h2>Relatório</h2>
+        <h3 id="dados-membro">Dados do membro</h3>
+            <ul>
+                <li><b>Nome:</b> Luisa de Souza Ferreira</li>
+                <li><b>Matrícula:</b> 232014807</li>
+                <li><b>Email:</b> email@email</li>
+            </ul>
+            
+        <h3 id="dificuldades">Dificuldades encontradas</h3>
+            <p>
+                Texto aqui
+            </p>
+        
+        <h3 id="contribuicoes">Contribuições</h3>
+            <p>
+                Texto aqui
+            </p>
+        
+        <h3 id="opiniao">Opinião pessoal sobre o trabalho</h3>
+            <p>
+                Texto aqui
+            </p>
+
+  </section>
+  <nav class="report-toc"></nav>
+</div>
+
+  <script>
+    function goto(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Highlight active nav tab
+    const tabs = document.querySelectorAll('.nav-tab');
+    const ids = ['inicio','dados','dificuldades','contribuicoes','opiniao', 'relatorio'];
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        tabs.forEach(t => {
+          t.style.background = t.getAttribute('href') === '#' + e.target.id
+            ? 'rgba(255,255,255,0.15)' : '';
+        });
+      });
+    }, { threshold: 0.5 });
+    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+
+    const nav = document.querySelector('.nav');
+    const hero = document.querySelector('.hero');
+
+    const navObserver = new IntersectionObserver(
+    ([entry]) => {
+        if (entry.isIntersecting) {
+        nav.classList.remove('light');
+        } else {
+        nav.classList.add('light');
+        }
+    },
+    { threshold: 0.1 }
+    );
+
+    navObserver.observe(hero);
+
+    function initReportNav() {
+      const reportSection = document.querySelector('.report-section');
+      const navEl = document.querySelector('.report-toc');
+      if (!reportSection || !navEl) return;
+
+      const headings = Array.from(reportSection.querySelectorAll('h3, h4'));
+      if (headings.length === 0) return;
+
+      const list = document.createElement('ul');
+      list.className = 'report-nav-list';
+
+      headings.forEach((heading, index) => {
+        if (!heading.id) {
+          const slug = heading.textContent
+            .toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+          heading.id = `relatorio-${index}-${slug}`;
+        }
+
+        const li = document.createElement('li');
+        li.className = 'report-nav-item' + (heading.tagName === 'H4' ? ' sub' : '');
+
+        const a = document.createElement('a');
+        a.href = '#' + heading.id;
+        a.textContent = heading.textContent;
+        a.dataset.target = heading.id;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+
+      navEl.appendChild(list);
+
+      const h3s = headings.filter(h => h.tagName === 'H3');
+      const links = navEl.querySelectorAll('.report-nav-item a');
+      const topOffset = 120;
+
+      function updateActiveSection() {
+        let current = h3s[0];
+        for (const h of h3s) {
+          if (h.getBoundingClientRect().top <= topOffset) {
+            current = h;
+          } else {
+            break;
+          }
+        }
+        links.forEach(a => {
+          a.classList.toggle('active', !!current && a.dataset.target === current.id);
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveSection, { passive: true });
+      window.addEventListener('resize', updateActiveSection);
+      updateActiveSection();
+    }
+
+    initReportNav();
+
+  </script>
+
+</body>
+</html>
