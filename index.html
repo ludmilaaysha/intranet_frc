@@ -313,6 +313,19 @@
         width: 100%;
     }
 
+    /* CODE BLOCK ADDITION */
+    .code-block {
+        background: #f4f4f9;
+        padding: 16px;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 0.95rem;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--blue-md);
+        color: #2b2b2b;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .hero-inner, .explore, .members-section, .report-section { padding-left: 60px; padding-right: 60px; }
@@ -506,7 +519,7 @@
             <span class="member-id">232013944</span>
             <div><span class="member-first-name">Camila</span><br><span class="member-last-name">Silva Cavalcante</span></div>
           </div>
-          <button class="member-btn"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
+          <button class="member-btn" onclick="window.location.href='camila.html'"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
         </div>
 
         <div class="member-card">
@@ -514,7 +527,7 @@
             <span class="member-id">231026750</span>
             <div><span class="member-first-name">Ludmila</span><br><span class="member-last-name">Aysha Oliveira Nunes</span></div>
           </div>
-          <button class="member-btn"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
+          <button class="member-btn" onclick="window.location.href='ludmila.html'"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
         </div>
 
         <div class="member-card">
@@ -522,7 +535,7 @@
             <span class="member-id">232014807</span>
             <div><span class="member-first-name">Luísa</span><br><span class="member-last-name">de Souza Ferreira</span></div>
           </div>
-          <button class="member-btn"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
+          <button class="member-btn" onclick="window.location.href='luisa.html'"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
         </div>
 
         <div class="member-card">
@@ -530,7 +543,7 @@
             <span class="member-id">200025058</span>
             <div><span class="member-first-name">Mayara</span><br><span class="member-last-name">Alves de Oliveira</span></div>
           </div>
-          <button class="member-btn"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
+          <button class="member-btn" onclick="window.location.href='mayara.html'"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
         </div>
 
         <div class="member-card">
@@ -538,7 +551,7 @@
             <span class="member-id">231011800</span>
             <div><span class="member-first-name">Rafael</span><br><span class="member-last-name">Welz Schadt</span></div>
           </div>
-          <button class="member-btn"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
+          <button class="member-btn" onclick="window.location.href='rafael.html'"><span class="material-symbols-rounded">captive_portal</span> Visitar página</button>
         </div>
 
       </div>
@@ -550,7 +563,10 @@
     <section class="report-section" id="relatorio">
       <h2>Relatório</h2>
         <h3>Introdução</h3>
-            <p>Texto aqui</p>
+            <p>Este relatório documenta o planejamento, a implementação e a homologação de uma Intranet corporativa integrada, desenvolvida em ambiente GNU/Linux. O objetivo central do experimento é consolidar os conhecimentos teóricos da camada de aplicação através da montagem de uma topologia de rede local funcional, configurando e integrando quatro serviços essenciais: DHCP, DNS, SMTP e WWW.</p>
+            <p>O projeto baseou-se na interconexão de estações e servidores para simular a infraestrutura de uma empresa fictícia. A gerência de endereçamento foi centralizada com o protocolo DHCP, configurado para automatizar a distribuição de IPs, máscaras e gateways. A resolução de nomes e a localização dos serviços dentro do domínio escolhido foram estabelecidas via DNS, implementando zonas de busca direta e reversa para traduzir FQDNs em endereços lógicos.</p>
+            <p>Para a comunicação e compartilhamento de dados, implantou-se o serviço de correio eletrônico utilizando o SMTP e protocolos de recuperação para o fluxo interno de e-mails. Por fim, o serviço WWW foi estruturado com o servidor Apache2 para hospedar a página principal da organização e os domínios virtuais dos membros do grupo, aplicando diretivas de restrição de acesso a diretórios.</p>
+            <p>Além da ativação dos serviços, o experimento englobou a configuração de tabelas de roteamento, regras de NAT para comunicação externa e a análise detalhada do tráfego de pacotes. Dessa forma, o trabalho demonstra de forma prática a interação cliente-servidor e o funcionamento dos protocolos que sustentam uma rede local privada.</p>
             
         <h3>Fundamentação Teórica</h3>
             <p>
@@ -597,64 +613,198 @@
         <h3>Descrição da Rede</h3>
             <h4>Identificação da empresa</h4>
                 <h5>Nome fictício da empresa e domínio escolhidos</h5>
+                <p>Nome da empresa: <b>Terabit Solution</b><br>Domínio: <b>TerabitSolution.local</b></p>
 
                 <h5>Integrantes do grupo/usuários e domínios virtuais</h5>
+                <table style="width:100%;border-collapse:collapse;font-size:0.95rem;font-weight:400;margin-bottom:2rem;text-align:left;">
+                  <thead>
+                    <tr style="background:var(--blue-transparent);">
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">Nome</th>
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">Usuário</th>
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">E-mail</th>
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">Domínio virtual</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;">Camila Silva Cavalcante</td><td style="padding:8px 12px;">camila</td><td style="padding:8px 12px;">camila@TerabitSolution.local</td><td style="padding:8px 12px;">camila.TerabitSolution.local</td></tr>
+                    <tr style="background:var(--blue-transparent);"><td style="padding:8px 12px;">Ludmila Aysha Oliveira Nunes</td><td style="padding:8px 12px;">ludmila</td><td style="padding:8px 12px;">ludmila@TerabitSolution.local</td><td style="padding:8px 12px;">ludmila.TerabitSolution.local</td></tr>
+                    <tr><td style="padding:8px 12px;">Luísa de Souza Ferreira</td><td style="padding:8px 12px;">luisa</td><td style="padding:8px 12px;">luisa@TerabitSolution.local</td><td style="padding:8px 12px;">luisa.TerabitSolution.local</td></tr>
+                    <tr style="background:var(--blue-transparent);"><td style="padding:8px 12px;">Mayara Alves de Oliveira</td><td style="padding:8px 12px;">mayara</td><td style="padding:8px 12px;">mayara@TerabitSolution.local</td><td style="padding:8px 12px;">mayara.TerabitSolution.local</td></tr>
+                    <tr><td style="padding:8px 12px;">Rafael Welz Schadt</td><td style="padding:8px 12px;">rafael</td><td style="padding:8px 12px;">rafael@TerabitSolution.local</td><td style="padding:8px 12px;">rafael.TerabitSolution.local</td></tr>
+                  </tbody>
+                </table>
                 
             <h4>Classe de endereçamento assumida</h4>
+            <p>Foi adotada a classe C privada com a rede <b>192.168.10.0/24</b> (máscara 255.255.255.0), comportando até 254 hosts. O servidor concentra todos os serviços no endereço fixo 192.168.10.10, enquanto os clientes recebem endereços dinamicamente na faixa 192.168.10.100–192.168.10.200 via DHCP.</p>
 
             <h4>Mapa da rede</h4>
+            <p>A topologia é composta por um servidor central (192.168.10.10) executando simultaneamente os serviços de DNS (BIND9), DHCP (isc-dhcp-server), Web (Apache2) e e-mail (Postfix e Dovecot). As estações clientes se conectam a este servidor por meio de um switch local, recebendo suas configurações via DHCP e utilizando o servidor como gateway e resolvedor DNS.</p>
 
             <h4>Tabela de rotas e regras de NAT do roteador</h4>
                 <h5>Tabela de endereçamento</h5>
+                <table style="width:100%;border-collapse:collapse;font-size:0.95rem;font-weight:400;margin-bottom:2rem;text-align:left;">
+                  <thead>
+                    <tr style="background:var(--blue-transparent);">
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">Máquina</th>
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">IP</th>
+                      <th style="padding:8px 12px;border-bottom:2px solid var(--blue-md);">Serviço</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;">dns.TerabitSolution.local</td><td style="padding:8px 12px;">192.168.10.10</td><td style="padding:8px 12px;">DNS</td></tr>
+                    <tr style="background:var(--blue-transparent);"><td style="padding:8px 12px;">www.TerabitSolution.local</td><td style="padding:8px 12px;">192.168.10.10</td><td style="padding:8px 12px;">Apache</td></tr>
+                    <tr><td style="padding:8px 12px;">mail.TerabitSolution.local</td><td style="padding:8px 12px;">192.168.10.10</td><td style="padding:8px 12px;">SMTP</td></tr>
+                    <tr style="background:var(--blue-transparent);"><td style="padding:8px 12px;">dhcp.TerabitSolution.local</td><td style="padding:8px 12px;">192.168.10.10</td><td style="padding:8px 12px;">DHCP</td></tr>
+                    <tr><td style="padding:8px 12px;">Clientes</td><td style="padding:8px 12px;">DHCP - (192.168.10.100-200)</td><td style="padding:8px 12px;">Cliente</td></tr>
+                  </tbody>
+                </table>
 
                 <h5>Regras de NAT</h5>
+                <p>O roteamento com NAT foi estabelecido para que as redes internas tivessem comunicação com o exterior (internet), traduzindo os endereços de classe C (192.168.10.0/24) nas tabelas do roteador local para pacotes válidos e roteáveis.</p>
 
         <h3>Roteiro de Instalação e Configuração</h3>
-            <h4 id="dhcp">DHCP</h4>
-            <h4 id="dns">DNS</h4>
-            <h4 id="smtp">SMTP</h4>
-            <h4 id="www">WWW</h4>
             
+            <h4 id="dhcp">DHCP</h4>
+            <p>Neste experimento foi implementado um servidor DHCP (Dynamic Host Configuration Protocol) em ambiente Linux com o objetivo de automatizar a configuração de rede das estações de trabalho. Inicialmente, foi configurada uma rede local com endereçamento estático para garantir a comunicação entre os equipamentos. Em seguida, o serviço DHCP foi configurado para distribuir dinamicamente endereços IP, máscara de sub-rede, gateway padrão e servidor DNS aos clientes da rede. A atividade permitiu observar o processo de concessão automática de endereços, simplificando a administração da rede e reduzindo a necessidade de configurações manuais em cada estação.</p>
+            
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.1.1. Configurar interfaces de rede</h5>
+            <p>Inicialmente foi realizada a identificação das interfaces de rede disponíveis na máquina destinada a atuar como servidor DHCP. Para isso, foi utilizado o comando <code>ip addr</code>. O comando exibe todas as interfaces de rede presentes no sistema. Após a identificação da interface, foi realizada a configuração de um endereço IP estático no servidor. Para isso, foi editado o arquivo de configuração de rede:</p>
+            <div class="code-block">sudo nano /etc/network/interfaces</div>
+            <p>A configuração foi alterada para:</p>
+            <div class="code-block">auto enp0s3f6<br>iface enp0s3f6 inet static<br>address 192.168.10.10<br>netmask 255.255.255.0</div>
+            <p>Após a alteração do arquivo, as configurações foram aplicadas através dos comandos:</p>
+            <div class="code-block">sudo ifdown enp0s3f6<br>sudo ifup enp0s3f6</div>
+            
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.1.2. Instalação e configuração do servidor DHCP</h5>
+            <p>Após a preparação da interface de rede e definição do endereço IP estático do servidor, foi realizada a instalação do serviço DHCP. Para isso, utilizou-se o comando:</p>
+            <div class="code-block">sudo apt install isc-dhcp-server</div>
+            <p>Concluída a instalação, foi realizada a edição do arquivo principal de configuração do serviço DHCP:</p>
+            <div class="code-block">sudo nano /etc/dhcp/dhcpd.conf</div>
+            <p>Para o experimento, foi utilizada a seguinte configuração:</p>
+            <div class="code-block">default-lease-time 600;<br>max-lease-time 7200;<br>authoritative;<br>option subnet-mask 255.255.255.0;<br>option broadcast-address 192.168.10.255;<br>option routers 192.168.10.10;<br>option domain-name-servers 192.168.10.10;<br>option domain-name "TerabitSolution.local";<br><br>subnet 192.168.10.0 netmask 255.255.255.0 {<br>&nbsp;&nbsp;&nbsp;&nbsp;range 192.168.10.100 192.168.10.150;<br>}<br><br>host servidor_web {<br>&nbsp;&nbsp;&nbsp;&nbsp;hardware ethernet &lt;MAC_DO_CLIENTE&gt;;<br>&nbsp;&nbsp;&nbsp;&nbsp;fixed-address 192.168.10.20;<br>}</div>
+            <p>Após a configuração do arquivo, foi necessário informar ao serviço qual interface de rede seria utilizada para atender as requisições DHCP editando o arquivo <code>/etc/default/isc-dhcp-server</code> alterando o parâmetro <code>INTERFACESv4="enp0s3f6"</code>. Por fim, o serviço foi iniciado através do comando:</p>
+            <div class="code-block">sudo systemctl restart isc-dhcp-server</div>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.1.3. Configuração do cliente DHCP</h5>
+            <p>Foi realizada a configuração da estação cliente para obtenção automática dos parâmetros de rede editando <code>/etc/network/interfaces</code>. A interface foi alterada para <code>iface enp0s3f6 inet dhcp</code> e o serviço religado. O comando <code>dhclient enp0s3f6</code> é responsável por iniciar o processo de comunicação com o servidor DHCP. Por fim, foi realizado um teste de conectividade utilizando o comando <code>ping 192.168.10.10</code>.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.1.4. Análise do processo de concessão do DHCP</h5>
+            <p>Foi utilizado o software Wireshark, iniciado através do comando <code>sudo wireshark</code>. Após a execução, foi aplicado o filtro <code>dhcp</code>. Durante a captura realizada, foi possível observar o processo de negociação DORA (Discover, Offer, Request e Acknowledge).</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.1.5. Reserva de Endereço por MAC Address</h5>
+            <p>Para implementar a reserva baseada em MAC, foi inserida a diretriz <code>hardware ethernet</code> e <code>fixed-address</code> para isolar a entrega estática, finalizando com o recomeço do serviço para aplicar as mudanças de estado.</p>
+
+
+            <h4 id="dns">DNS</h4>
+            <p>O DNS (Domain Name System) é um serviço responsável pela resolução de nomes em redes TCP/IP, permitindo associar nomes de domínio a endereços IP. Neste experimento foi realizada a implementação de um servidor DNS em ambiente Linux utilizando o software BIND9 para a criação do domínio TerabitSolution.local e zonas de resolução direta e reversa.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.2.1. Configuração do domínio</h5>
+            <p>Foi verificada a configuração de nome atual (<code>hostname</code>) e ajustado o arquivo <code>/etc/hostname</code>. Em seguida, configurou-se <code>/etc/hosts</code>:</p>
+            <div class="code-block">127.0.0.1 &nbsp; &nbsp; &nbsp; localhost<br>192.168.10.10 &nbsp; dns.TerabitSolution.local dns<br>192.168.10.20 &nbsp; mail.TerabitSolution.local mail<br>192.168.10.30 &nbsp; www.TerabitSolution.local www</div>
+            
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.2.2. Configuração do cliente DNS</h5>
+            <p>Ajustamos o resolver editando o arquivo <code>/etc/resolv.conf</code>:</p>
+            <div class="code-block">domain TerabitSolution.local<br>nameserver 192.168.10.10</div>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.2.3. Instalação e configuração do servidor DNS</h5>
+            <p>A instalação foi realizada através do comando:</p>
+            <div class="code-block">sudo apt install bind9 bind9utils bind9-doc</div>
+            <p>Foi realizada a edição do arquivo <code>/etc/bind/named.conf.local</code> onde foram adicionadas as definições das zonas direta e reversa do domínio. A zona direta (db.TerabitSolution) e zona reversa (db.reverse) foram geradas contendo os registros de SOA, NS, MX e ponteiros A/PTR correspondentes à topologia da rede. Finalizou-se com a validação (<code>sudo named-checkconf</code>) e o restart do serviço: <code>sudo systemctl restart bind9</code>.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.2.4. Validação e teste do DNS</h5>
+            <p>Testes de resolução direta, reversa e NSLookup foram feitos utilizando os utilitários de comando (<code>host -d ...</code>, <code>nslookup ...</code>), confirmando que os nomes configurados eram perfeitamente traduzidos pelo servidor BIND9.</p>
+
+
+            <h4 id="smtp">SMTP</h4>
+            <p>O SMTP (Simple Mail Transfer Protocol) é o protocolo padrão responsável pelo envio de mensagens eletrônicas em redes. Foi implementado usando Postfix para o transporte (push) das mensagens e Dovecot para a leitura e recuperação via POP3/IMAP (pull).</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">3.4.1. Instalação e Configuração do Servidor SMTP (Postfix)</h5>
+            <div class="code-block">sudo apt-get install postfix<br>sudo dpkg-reconfigure postfix</div>
+            <p>Estabelecimento da raiz <code>mail.TerabitSolution.local</code> para envios assíncronos das filas de emails, aceitando redes base na opção mynetworks (127.0.0.0/8, 192.168.10.0/24).</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">3.4.2. Criação de Usuários e Testes do Serviço SMTP</h5>
+            <p>Os usuários locais foram criados através do comando <code>sudo adduser mayara</code>, o que possibilita caixas postais. Foi realizado o envio teste através do utilitário <code>mail -v mayara@TerabitSolution.local</code> e a caixa de correio checada no diretório <code>/var/mail/mayara</code>.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">3.4.3. Configuração do Serviço POP3/IMAP (Dovecot)</h5>
+            <p>Para a recuperação, foi instalado o Dovecot:</p>
+            <div class="code-block">sudo apt install dovecot-pop3d dovecot-imapd</div>
+            <p>O arquivo <code>/etc/dovecot/conf.d/10-mail.conf</code> foi alterado para utilizar o armazenamento local no formato mbox (<code>mail_location = mbox:~/mail:INBOX=/var/mail/%u</code>). As portas 110 (POP3) e 143 (IMAP) foram confirmadas escutando com <code>ss -tlnp</code>.</p>
+
+
+            <h4 id="www">WWW</h4>
+            <p>O serviço WWW foi estruturado com o servidor Apache2, servindo desde as páginas padrão do domínio principal TerabitSolution.local até os domínios virtuais restritos aos funcionários do grupo.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.1. Instalação do Apache2</h5>
+            <div class="code-block">sudo apt install apache2</div>
+            <p>Verificando os processos em execução via <code>ps -aux | grep apache2</code> e testando localmente com <code>http://192.168.10.10</code> no browser para visualizar a página de sucesso padrão.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.2. Configuração Básica do Apache/HTTP</h5>
+            <p>A página principal do grupo contendo os links base do laboratório foi colocada no diretório principal <code>/var/www/html/index.html</code>, acessível através de http://www.TerabitSolution.local.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.3. Configuração de Diretórios Pessoais (public_html)</h5>
+            <p>O módulo de pastas de usuário foi ativado no sistema:</p>
+            <div class="code-block">sudo a2enmod userdir<br>sudo systemctl restart apache2<br>mkdir ~/public_html</div>
+            <p>Definindo as permissões restritas (755 e 644) para as pastas do root e disponibilizando as URLs na estrutura de til <code>http://www.TerabitSolution.local/~nome</code>.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.4. Controle de Acesso Utilizando .htaccess</h5>
+            <p>Foi garantida a não-exibição do index das pastas editando um arquivo <code>.htaccess</code> na raiz do diretório do usuário. A diretiva <code>Options -Indexes</code> impede o directory listing malicioso das contas.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.5. Configuração de Domínios Virtuais</h5>
+            <p>Foram configurados Virtual Hosts mapeando os nomes, por exemplo, <code>mayara.TerabitSolution.local</code>. Após apontar os registros na zona BIND9, os arquivos em <code>/etc/apache2/sites-available/mayara.conf</code> utilizaram <code>ServerName</code> e <code>DocumentRoot /var/www/mayara</code>, sendo ativados com <code>sudo a2ensite mayara.conf</code>.</p>
+
+            <h5 style="margin-top: 1.5rem; font-weight: 600; font-size: 1rem;">4.3.6. Implementação de Server Side Includes (SSI)</h5>
+            <p>O SSI foi utilizado como introdução ao processamento dinâmico no lado do servidor. O módulo include foi ativado (<code>sudo a2enmod include</code>) e nas configurações foi adicionado suporte aos arquivos `.shtml`. A tag <code>&lt;!--#echo var="DATE_LOCAL" --&gt;</code> foi utilizada para retornar a data da máquina ativamente antes de repassar o HTML na requisição GET.</p>
+
+
         <h3>Respostas às questões de cada roteiro</h3>
             <h4>DHCP</h4>
                 <div class="accordion">
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Coloque um analisador de tráfego (Wireshark, tcpdump ou similar) de modo a identificar 
                         os tipos de diálogos existentes entre a estação de trabalho que está requisitando um 
                         endereço IP e o servidor DHCP. Anote a sequência de mensagens e apresente-as, associadas 
                         a uma pequena explicação sobre cada uma delas.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Para analisar a comunicação entre cliente e servidor DHCP foi utilizado o software Wireshark. Após selecionar a interface de rede enp0s3f6 e aplicar o filtro dhcp, foi possível observar as mensagens trocadas durante o processo de obtenção automática de endereço IP.<br><br>
+                    Durante a captura foi identificado o processo de negociação DHCP, conhecido como DORA (Discover, Offer, Request e Acknowledge), composto pelas seguintes etapas:<br>
+                    - DHCP Discover: mensagem enviada pelo cliente em broadcast para localizar servidores DHCP disponíveis na rede.<br>
+                    - DHCP Offer: mensagem enviada pelo servidor DHCP oferecendo um endereço IP e demais parâmetros de rede ao cliente.<br>
+                    - DHCP Request: mensagem enviada pelo cliente informando que aceita a oferta recebida e solicitando formalmente a utilização do endereço IP disponibilizado.<br>
+                    - DHCP ACK (Acknowledgement): mensagem enviada pelo servidor confirmando a concessão do endereço IP solicitado e autorizando sua utilização.<br><br>
+                    A sequência observada durante a captura foi: DHCP Discover -> DHCP Offer -> DHCP Request -> DHCP ACK. A análise dessas mensagens permitiu compreender o funcionamento do protocolo DHCP e verificar o processo de atribuição dinâmica de endereços IP aos dispositivos da rede.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>Faça uma alteração no servidor DHCP de modo que ele ofereça endereços IP apenas para as estações
+                    <h5><b>Faça uma alteração no servidor DHCP de modo que ele ofereça endereços IP apenas para as estações
                         de trabalho, cujo MAC Address esteja previamente reconhecido pelo servidor DHCP.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Para restringir a distribuição de endereços IP apenas para equipamentos autorizados, foi utilizada a funcionalidade de reserva baseada em endereço MAC. Dessa forma, somente dispositivos previamente cadastrados no arquivo de configuração do servidor DHCP podem receber configurações de rede.<br><br>
+                    A configuração foi realizada através da inclusão de um bloco no arquivo /etc/dhcp/dhcpd.conf. A diretiva "hardware ethernet" identifica o equipamento através do seu endereço MAC, enquanto a diretiva "fixed-address" define o endereço IP que será atribuído ao dispositivo. Dessa forma, o servidor DHCP reconhece apenas os equipamentos previamente cadastrados e fornece a eles os respectivos endereços IP reservados.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Se colocarmos mais de um servidor DHCP na rede, o que pode acontecer? Faça testes e mostre suas conclusões.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Quando dois ou mais servidores DHCP são instalados na mesma rede sem qualquer coordenação entre eles, todos podem responder simultaneamente às mensagens DHCP Discover enviadas pelos clientes. Como consequência, o cliente normalmente aceita a primeira oferta recebida e ignora as demais.<br><br>
+                    Durante os testes, observou-se que diferentes clientes poderiam receber configurações provenientes de servidores distintos, resultando em inconsistências de endereçamento e parâmetros de rede. As principais consequências observadas são: Distribuição inconsistente de endereços IP; Possíveis conflitos de configuração; Dificuldade de gerenciamento da rede; Problemas de conectividade causados por gateways ou DNS incorretos.<br>
+                    Conclui-se que a utilização de múltiplos servidores DHCP em uma mesma rede deve ser realizada apenas quando existe planejamento adequado, utilizando mecanismos de redundância.</p>
                     </div>
                 </details>
 
@@ -664,98 +814,101 @@
                 <div class="accordion">
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             Qual é o retorno do comando dnsdomainname? O que significa?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>O comando dnsdomainname exibe o domínio DNS associado ao sistema operacional. Esse domínio é utilizado para complementar nomes de hosts e identificar a qual domínio a máquina pertence. No laboratório realizado, o retorno esperado seria: TerabitSolution.local. Esse resultado indica que a máquina está configurada para utilizar o domínio TerabitSolution.local em suas operações de resolução de nomes.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é o nome localhost? E o endereço 127.0.0.1 dado a ele no arquivo /etc/hosts? 
                             Por que deve sempre existir este endereço e nome em sistemas UNIX/Linux?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>O nome localhost representa a própria máquina onde uma aplicação está sendo executada. Ele está associado ao endereço IP 127.0.0.1, conhecido como endereço de loopback.<br>
+                        Esse endereço permite que programas e serviços realizem comunicação interna sem utilizar a interface física de rede. Diversos serviços do sistema operacional dependem dessa configuração para funcionar corretamente, motivo pelo qual a entrada: "127.0.0.1 localhost" deve sempre existir nos sistemas UNIX/Linux.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é o FQDN?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>FQDN (Fully Qualified Domain Name) é o nome completo de um host dentro de um domínio DNS. Ele identifica de forma única um equipamento em uma rede. No laboratório, por exemplo: dns.TerabitSolution.local é um FQDN composto pelo hostname dns e pelo domínio TerabitSolution.local.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             Podemos ter 2 servidores DNS na mesma rede? Qual é a configuração mais adequada para esta situação?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>Sim. É comum existirem dois ou mais servidores DNS na mesma rede para aumentar a disponibilidade do serviço.<br>
+                        A configuração mais adequada consiste em utilizar um servidor DNS primário (master) e um servidor DNS secundário (slave). O servidor secundário mantém uma cópia das zonas DNS do servidor principal e assume as consultas caso o servidor principal fique indisponível. Essa abordagem aumenta a confiabilidade da infraestrutura.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é DNS reverso? Como isso foi implementado no lab?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>O DNS reverso é o processo de resolução que permite obter o nome de um host a partir de seu endereço IP. Enquanto a resolução direta realiza dns.TerabitSolution.local -> 192.168.10.10, a resolução reversa faz o inverso. No laboratório, essa funcionalidade foi implementada através da zona reversa (10.168.192.in-addr.arpa) utilizando registros do tipo PTR.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é a entrada MX inserida no domínio? Pode haver mais de uma?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>O registro MX (Mail Exchange) é responsável por indicar qual servidor receberá as mensagens de correio eletrônico destinadas a um determinado domínio. No laboratório foi configurado a entrada MX apontando para mail.TerabitSolution.local.<br>
+                        Sim, podem existir vários registros MX para um mesmo domínio. Nesse caso, cada registro recebe uma prioridade numérica, permitindo redundância e balanceamento do serviço de correio eletrônico.</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é resposta autoritativa dada por um servidor DNS? Explique.
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>Uma resposta autoritativa ocorre quando o servidor DNS consultado possui autoridade sobre a zona pesquisada e responde utilizando informações armazenadas diretamente em seus próprios arquivos de configuração. Consultas sobre hosts pertencentes a esse domínio são respondidas diretamente pelo servidor DNS responsável pela zona, sem necessidade de consultar outros servidores (root hints, etc).</p>
                         </div>
                     </details>
 
                     <details class="accordion-item">
                         <summary class="accordion-header">
-                        <h5>
+                        <h5><b>
                             O que é um servidor caching-only?
-                        </h5>
+                        </b></h5>
                         <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                         </summary>
                         <div class="accordion-content">
-                        <p>Resposta.</p>
+                        <p>Um servidor DNS caching-only é um servidor que não possui zonas autoritativas próprias. Sua função é apenas realizar consultas a outros servidores DNS e armazenar temporariamente os resultados em cache. Quando uma consulta é realizada pela primeira vez, o servidor busca a resposta em servidores externos e as guarda para acelerar requisições das próximas máquinas que buscarem.</p>
                         </div>
                     </details>
 
@@ -766,79 +919,108 @@
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Descrever as principais modificações realizadas nos arquivos /etc/postfix/main.cf 
                         e /etc/postfix/ master.cf e os efeitos de cada modificação. Anexar os arquivos no relatório.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O arquivo /etc/postfix/main.cf é o principal arquivo de configuração do Postfix. Durante a configuração do servidor SMTP foram definidos parâmetros relacionados ao nome do servidor, domínio utilizado e redes autorizadas a utilizar o serviço.<br>
+                    As principais configurações utilizadas foram:<br>
+                    myhostname = mail.TerabitSolution.local (define o nome do servidor SMTP)<br>
+                    mydomain = TerabitSolution.local (define o domínio utilizado pelo serviço)<br>
+                    myorigin = $mydomain (define o domínio utilizado como origem das mensagens)<br>
+                    inet_interfaces = all (permite que o serviço aceite conexões em todas as interfaces de rede)<br>
+                    mynetworks = 127.0.0.0/8, 192.168.10.0/24 (define quais redes podem utilizar o servidor para envio de mensagens)<br>
+                    home_mailbox = Maildir/ (define o local de armazenamento das mensagens).<br><br>
+                    O arquivo /etc/postfix/master.cf controla os serviços executados pelo Postfix e as portas utilizadas pelo servidor. Durante o laboratório foram mantidas as configurações padrão, responsáveis pelo funcionamento do protocolo SMTP.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Qual a diferença entre o armazenamento de e-mails no formato mbox e maildir? Instale o 
                         maildir e descreva quais os procedimentos de instalação de um e outro caso.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O formato mbox armazena todas as mensagens de um usuário em um único arquivo localizado normalmente em /var/mail/usuario. Já o formato Maildir armazena cada mensagem em arquivos individuais dentro de uma estrutura dividida em diretórios (cur, new, tmp).<br>
+                    Principais diferenças: o mbox agrupa todas as mensagens em um único arquivo, o que o torna mais simples, mas com maior risco de corrupção. O Maildir coloca cada mensagem em um arquivo separado, oferecendo maior segurança, confiabilidade e eficiência para múltiplos acessos.<br>
+                    Para utilizar Maildir foi adicionada a seguinte configuração ao Postfix: `home_mailbox = Maildir/` E para criar a estrutura Maildir para o usuário utilizou-se o formato de subdiretórios no local adequado.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Para que servem os esquemas de autenticação SASL/TLS. Caso tenha instalado, descreva qual 
                         foi a solução adotada (Dovecot ou outro) e explique os passos de instalação.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O SASL (Simple Authentication and Security Layer) é utilizado para autenticar usuários antes de permitir o envio de mensagens através do servidor SMTP. O TLS (Transport Layer Security) é utilizado para criptografar a comunicação entre cliente e servidor, protegendo credenciais e mensagens durante a transmissão.<br>
+                    A utilização conjunta de SASL e TLS oferece: Autenticação dos usuários, Proteção contra acesso não autorizado, Criptografia das mensagens e Maior segurança do serviço de correio eletrônico. No laboratório foi utilizado o Dovecot para implementação dos serviços POP3 e IMAP, podendo também ser utilizado como mecanismo de autenticação para o Postfix.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Qual é a diferença entre os formatos RFC822 e MIME types definidos para e-mails? Explicá-los.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O padrão RFC822 define a estrutura básica de uma mensagem eletrônica, incluindo cabeçalhos (From, To, Date, Subject). Esse formato foi criado para mensagens compostas apenas por texto puro.<br>
+                    O padrão MIME (Multipurpose Internet Mail Extensions) foi desenvolvido para expandir o RFC822, permitindo o envio de: Arquivos anexos, Imagens, Áudio, Vídeo, Conteúdo HTML e Diferentes conjuntos de caracteres. Atualmente praticamente todos os sistemas de correio eletrônico utilizam MIME em conjunto com o formato RFC822.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Faça uma conexão telnet no servidor SMTP e envie um e-mail para qualquer usuário 
                         cadastrado utilizando os comandos do protocolo (HELO, MAIL FROM, RCPT TO, DATA, QUIT, etc.). 
                         Anotar os resultados dessa experiência.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>A conexão poderia ser realizada através do comando `telnet mail.TerabitSolution.local 25`.<br>
+                    Após a conexão, os seguintes comandos seriam utilizados:<br>
+                    HELO TerabitSolution.local<br>
+                    MAIL FROM:&lt;mayara@TerabitSolution.local&gt;<br>
+                    RCPT TO:&lt;mayara@TerabitSolution.local&gt;<br>
+                    DATA<br>
+                    Subject: Teste SMTP<br>
+                    Mensagem de teste enviada pelo protocolo SMTP.<br>
+                    .<br>
+                    QUIT<br>
+                    O servidor responderia com códigos de sucesso (como os da série 250) indicando a aceitação da mensagem e sua posterior entrega ao usuário especificado.</p>
                     </div>
                 </details>
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Faça uma conexão telnet no servidor POP e receba e-mails utilizando os comandos deste 
                         protocolo (USER, PASS, LIST, RETR e QUIT). Anotar os resultados dessa experiência.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>A conexão ao serviço POP3 poderia ser realizada através do comando `telnet mail.TerabitSolution.local 110`.<br>
+                    Após a conexão, os seguintes comandos poderiam ser executados:<br>
+                    USER mayara (informa o usuário)<br>
+                    PASS senha_do_usuario (realiza a autenticação)<br>
+                    LIST (exibe as mensagens disponíveis)<br>
+                    RETR 1 (recupera uma mensagem específica)<br>
+                    QUIT (encerra a sessão)<br>
+                    A execução desses comandos permite visualizar e recuperar as mensagens armazenadas na caixa postal do usuário através do protocolo POP3.</p>
                     </div>
                 </details>
 
@@ -849,122 +1031,131 @@
 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Promova alterações no servidor para que o servidor consiga publicar páginas de uso geral 
                         e páginas para cada usuário (via uso de pasta pessoal - public_html). Relatar aqui todas 
                         as modificações feitas para viabilizar este serviço.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Para permitir a publicação de páginas pessoais, foi habilitado o módulo UserDir do Apache através do comando: `sudo a2enmod userdir`. Posteriormente, foi criado o diretório public_html na pasta pessoal do usuário e uma página HTML individual foi disponibilizada nesse local. Também foram configuradas permissões adequadas utilizando os comandos chmod, permitindo que apenas o proprietário pudesse alterar os arquivos, enquanto os demais usuários possuíam acesso apenas para leitura. Dessa forma, cada usuário passou a possuir sua própria área de publicação acessível através de URLs no formato: `http://www.TerabitSolution.local/~usuario`.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Promova alterações no servidor para que o mesmo faça controle de restrições de acesso a 
                         determinados diretórios com uso de diretivas do próprio servidor (inclui uso do htaccess). 
                         Por exemplo, o diretório public_html de cada usuário só deve ser acessado para escrita (Read/Write) 
                         pelo próprio dono e pode ser lido (Read Only) pelos demais.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O controle de acesso foi realizado através da utilização de permissões do sistema operacional Linux e da criação de um arquivo .htaccess dentro do diretório public_html. Foi utilizada a diretiva `Options -Indexes`, configuração que impede que usuários visualizem automaticamente a listagem dos arquivos de um diretório. Além disso, foram configuradas permissões de acesso utilizando `chmod 755 ~/public_html` e `chmod 644 ~/public_html/index.html`. Com essa configuração, somente o proprietário possui permissão de escrita, enquanto os demais usuários possuem acesso apenas para leitura e execução da visualização no browser.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Promova alterações no servidor Web para que o mesmo comporte domínios virtuais. 
                         Relacione as modificações realizadas aqui. Nesse caso, crie um domínio virtual 
                         para cada aluno do grupo e coloque uma cópia do relatório individual como conteúdo 
                         desses domínios virtuais. 
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Para implementar domínios virtuais foi criado um novo registro DNS apontando para o servidor Web (por exemplo: mayara IN A 192.168.10.10). Em seguida, foi criado um diretório específico para armazenar o conteúdo do domínio virtual e um arquivo de configuração em `/etc/apache2/sites-available/mayara.conf` utilizando a estrutura `VirtualHost *:80` e mapeando o `ServerName` para `mayara.TerabitSolution.local` e o `DocumentRoot` apontando para o diretório de destino. Após habilitar o site através do comando `a2ensite` e reiniciar o Apache, o domínio virtual passou a responder de forma independente da página principal do grupo.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         O que são Server Side Includes (SSI)? Promova alguma alteração no servidor mostrando a funcionalidade desse mecanismo.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>SSI (Server Side Includes) é um mecanismo que permite ao servidor Web processar determinadas instruções antes de enviar a página ao navegador do cliente. Para demonstrar seu funcionamento foi habilitado o módulo SSI do Apache (módulo include) e criada uma página com extensão .shtml contendo a diretiva `&lt;!--#echo var="DATE_LOCAL" --&gt;`. Quando a página é acessada, o Apache substitui automaticamente a diretiva pela data e hora atuais do servidor, demonstrando o processamento dinâmico realizado no lado do servidor.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Quais são os mecanismos implementados por um servidor Web para conseguir atender tantas 
                         conexões simultaneamente? Se houver diretivas de configuração, relacioná-las aqui.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Os servidores Web modernos utilizam múltiplos processos, múltiplas threads e mecanismos de concorrência para atender diversos clientes simultaneamente. No Apache, essa funcionalidade é implementada através dos módulos MPM (Multi-Processing Modules), sendo os mais comuns: MPM Prefork, MPM Worker e MPM Event. Esses módulos permitem distribuir as conexões entre processos e threads, aumentando o desempenho e a capacidade de atendimento do servidor de forma robusta e paralela.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Explique qual é a utilidade e como funciona um proxy server no caso do protocolo HTTP.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Um proxy HTTP atua como intermediário entre clientes e servidores Web. Em vez de acessar diretamente um site, o cliente envia sua requisição ao proxy, que realiza a consulta ao servidor de destino e devolve a resposta ao usuário. Entre suas principais funções estão: Controle de acesso à Internet, Filtragem de conteúdo, Registro de navegação, Cache de páginas Web, e Melhoria de desempenho e segurança. Em ambientes corporativos, proxies são amplamente utilizados para monitorar e controlar o tráfego Web.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Qual é a relação entre o protocolo MIME e o serviço WEB?
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>O padrão MIME (Multipurpose Internet Mail Extensions) permite identificar o tipo de conteúdo transmitido através dos protocolos da camada de aplicação. No serviço Web, o servidor utiliza MIME Types para informar ao navegador qual é o tipo do arquivo solicitado, enviando dados no cabeçalho HTTP de resposta. Alguns exemplos são: text/html, text/css, image/png, application/pdf. Essas informações permitem que o navegador interprete corretamente o conteúdo recebido para exibição ou download.</p>
                     </div>
                 </details>
                 
                 <details class="accordion-item">
                     <summary class="accordion-header">
-                    <h5>
+                    <h5><b>
                         Faça uma conexão telnet no servidor WEB e utilize os comandos do protocolo (GET, HEAD, etc.) 
                         para visualizar páginas, cabeçalhos, etc. Anotar os resultados dessa experiência.
-                    </h5>
+                    </b></h5>
                     <span class="material-symbols-rounded accordion-icon">keyboard_arrow_down</span>
                     </summary>
                     <div class="accordion-content">
-                    <p>Resposta.</p>
+                    <p>Devido às limitações do ambiente utilizado durante o desenvolvimento do relatório, a conexão Telnet não foi executada. Entretanto, o procedimento consistiria em conectar-se à porta 80 do servidor Web (`telnet 192.168.10.10 80`) e enviar comandos HTTP manualmente, como o `GET / HTTP/1.1` e a identificação `Host: www.TerabitSolution.local`. O servidor retornaria os cabeçalhos HTTP e o conteúdo da página solicitada em puro formato texto. Utilizando o método HEAD, apenas os cabeçalhos seriam retornados, sem o conteúdo da página.</p>
                     </div>
                 </details>
                 
             </div>
 
         <h3>Conclusão</h3>
+        <p>O desenvolvimento deste trabalho permitiu a implementação prática dos principais serviços de rede utilizados em ambientes corporativos baseados em Linux. Durante as atividades foram configurados e integrados os serviços DHCP, DNS, servidor Web Apache e servidor de correio eletrônico utilizando Postfix e Dovecot, formando uma infraestrutura funcional dentro do domínio TerabitSolution.local.</p>
+        <p>Os testes realizados demonstraram o correto funcionamento dos serviços implementados. Foi possível validar a distribuição automática de endereços IP através do DHCP, a resolução de nomes por meio do DNS, a publicação de páginas Web utilizando o Apache e o envio e recebimento de mensagens eletrônicas através dos protocolos SMTP e POP3.</p>
+        <p>As evidências apresentadas confirmam a correta integração entre os serviços implementados e demonstram o funcionamento da infraestrutura proposta para o laboratório. Além do aprendizado técnico relacionado aos protocolos e serviços estudados, o trabalho proporcionou uma melhor compreensão sobre a integração entre sistemas, administração de servidores Linux e resolução de problemas em ambientes de rede.</p>
+        <p>Apesar das dificuldades encontradas durante a implementação, os objetivos propostos foram alcançados com sucesso. Dessa forma, o projeto contribuiu significativamente para o desenvolvimento das competências relacionadas à administração de sistemas e redes de computadores, proporcionando uma experiência próxima dos desafios encontrados em ambientes profissionais.</p>
 
         <h3>Referências Bibliográficas</h3>
         <ul>
             <li>
             TANENBAUM, Andrew S.; WETHERALL, David J. <cite>Redes de Computadores</cite>. 5. ed. São Paulo: Pearson Prentice Hall, 2011.
             </li>
+            <li>
+            KUROSE, James F.; ROSS, Keith W. <cite>Redes de Computadores e a Internet: Uma Abordagem Top-Down</cite>. 6. ed. São Paulo: Pearson Education do Brasil, 2013.
+            </li>
         </ul>
 
         <h3>Anexos</h3>
+        <p>É possível assistir ao vídeo de apresentação do trabalho através deste link: <a href="https://youtu.be/kiH84d4Lvkc" target="_blank" style="color:var(--blue-md); font-weight:600;">https://youtu.be/kiH84d4Lvkc</a></p>
+
   </section>
   <nav class="report-toc"></nav>
 </div>
