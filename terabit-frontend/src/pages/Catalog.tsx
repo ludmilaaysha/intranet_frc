@@ -2,7 +2,8 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Hero from '../components/catalog/Hero';
 import Highlights from '../components/catalog/Highlights';
-import Features from '../components/Features';
+import MulticastLAN from '../components/catalog/MulticastWAN';
+import Recommendations from '../components/catalog/Recommendations';
 import Testimonials from '../components/catalog/Testimonials';
 import FAQ from '../components/catalog/FAQ';
 
@@ -12,7 +13,8 @@ export default function MarketingPage() {
       {/* <div> */}
         <Hero />
         {/* <LogoCollection /> */}
-        <Features />
+        <MulticastLAN />
+        <Recommendations />
         <Divider />
         <Testimonials />
         <Divider />

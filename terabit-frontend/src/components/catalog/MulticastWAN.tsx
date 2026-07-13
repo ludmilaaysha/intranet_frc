@@ -14,9 +14,9 @@ import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
-    title: 'Dashboard',
+    title: 'Recomendados',
     description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
+      'Assista a canais que estão em alta e que dão match com você.',
     // imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-light.png")`,
     // imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-dark.png")`,
   },
@@ -133,7 +133,7 @@ export function MobileLayout({
   );
 }
 
-export default function Features() {
+export default function MulticastWAN() {
   const [selectedItemIndex, setSelectedItemIndex] = React.useState(0);
 
   const handleItemClick = (index: number) => {
@@ -151,7 +151,7 @@ export default function Features() {
           gutterBottom
           sx={{ color: 'text.primary' }}
         >
-          Product features
+          Transmissão Multicast WAN
         </Typography>
         <Typography
           variant="body1"
