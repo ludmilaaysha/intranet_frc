@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -46,6 +47,8 @@ export default function AppAppBar() {
     setOpen(newOpen);
   };
 
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="fixed"
@@ -71,7 +74,7 @@ export default function AppAppBar() {
               <Button variant="text" startIcon={<LiveTvRoundedIcon />} color="info" size="small">
                 Canais
               </Button>
-              <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small">
+              <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small" onClick={() => navigate("/admin")}>
                 Administrador
               </Button>
             </Box>
@@ -122,7 +125,7 @@ export default function AppAppBar() {
                 <Button variant="text" startIcon={<LiveTvRoundedIcon />} color="info" size="small">
                   Canais
                 </Button>
-                <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small">
+                <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small" onClick={() => navigate('/admin')}>
                   Administrador
                 </Button>
               </List>
