@@ -1,8 +1,31 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, ParseIntPipe, } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+  ParseIntPipe,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+  UseInterceptors,
+  UploadedFile,
+  Res,
+} from '@nestjs/common';
 import { ChannelsService } from './channels.service';
 import { CreateChannelDto } from './dto/create-channel.dto';
 import { UpdateChannelDto } from './dto/update-channel.dto';
-import { HttpCode, HttpStatus } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import type { Response } from 'express';
+import type { Multer } from 'multer';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
+import { UserRole } from '../auth/auth.types';
 
 @Controller('channels')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -44,14 +67,18 @@ export class ChannelsController {
       }),
     }),
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(@UploadedFile() file: Multer.File) {
     return {
       url: `/uploads/thumbnails/${file.filename}`,
     };
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateChannelDto) {
+  @Roles(UserRole.ADMIN)
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateChannelDto,
+  ) {
     return this.channelsService.update(id, dto);
   }
 
