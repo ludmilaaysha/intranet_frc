@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles';
 // import ForgotPassword from './ForgotPassword';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from '../CustomIcons';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { login } from '../../api/auth';
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -50,24 +51,26 @@ export default function SignInCard() {
     setOpen(false);
   };
 
+  const { login: setAuthenticated } = useAuth();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const isValid = validateInputs(); 
-      if (!isValid) return;
+    const isValid = validateInputs();
+    if (!isValid) return;
 
-      const data = new FormData(event.currentTarget);
-      const email = data.get('email') as string;
-      const password = data.get('password') as string;
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
 
-      try {
-        await login(email, password);
-        navigate('/catalog');
-      } catch (err) {
-
-        console.error(err);
-      }
-    };
+    try {
+      await login(email, password);
+      setAuthenticated();
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;

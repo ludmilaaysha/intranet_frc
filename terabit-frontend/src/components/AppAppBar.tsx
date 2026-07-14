@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -20,9 +19,7 @@ import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import CastConnectedRoundedIcon from '@mui/icons-material/CastConnectedRounded';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -49,6 +46,10 @@ export default function AppAppBar() {
 
   const navigate = useNavigate();
 
+  const handleAnchorClick = (sectionId: string) => () => {
+    navigate(`#${sectionId}`);
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -65,16 +66,40 @@ export default function AppAppBar() {
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <SitemarkIcon />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" startIcon={<HomeRoundedIcon />} color="info" size="small">
+              <Button
+                variant="text"
+                startIcon={<HomeRoundedIcon />}
+                color="info"
+                size="small"
+                onClick={handleAnchorClick('home')}
+              >
                 Início
               </Button>
-              <Button variant="text" startIcon={<WhatshotRoundedIcon />} color="info" size="small">
-                Recomendados
-              </Button>
-              <Button variant="text" startIcon={<LiveTvRoundedIcon />} color="info" size="small">
+              {/* <Button
+                variant="text"
+                startIcon={<CastConnectedRoundedIcon />}
+                color="info"
+                size="small"
+                onClick={handleAnchorClick('wan')}
+              >
+                WAN
+              </Button> */}
+              <Button
+                variant="text"
+                startIcon={<LiveTvRoundedIcon />}
+                color="info"
+                size="small"
+                onClick={handleAnchorClick('channels')}
+              >
                 Canais
               </Button>
-              <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small" onClick={() => navigate("/admin")}>
+              <Button
+                variant="text"
+                startIcon={<AdminPanelSettingsRoundedIcon />}
+                color="info"
+                size="small"
+                onClick={() => navigate('/admin')}
+              >
                 Administrador
               </Button>
             </Box>
@@ -108,34 +133,70 @@ export default function AppAppBar() {
                 },
               }}
             >
-            <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton onClick={toggleDrawer(false)}>
-                  <CloseRoundedIcon />
-                </IconButton>
+              <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <IconButton onClick={toggleDrawer(false)}>
+                    <CloseRoundedIcon />
+                  </IconButton>
+                </Box>
+
+                <List>
+                  <Button
+                    variant="text"
+                    startIcon={<HomeRoundedIcon />}
+                    color="info"
+                    size="small"
+                    onClick={() => {
+                      toggleDrawer(false)();
+                      handleAnchorClick('home')();
+                    }}
+                  >
+                    Início
+                  </Button>
+                  <Button
+                    variant="text"
+                    startIcon={<CastConnectedRoundedIcon />}
+                    color="info"
+                    size="small"
+                    onClick={() => {
+                      toggleDrawer(false)();
+                      handleAnchorClick('wan')();
+                    }}
+                  >
+                    WAN
+                  </Button>
+                  <Button variant="text" startIcon={<WhatshotRoundedIcon />} color="info" size="small">
+                    Recomendados
+                  </Button>
+                  <Button
+                    variant="text"
+                    startIcon={<LiveTvRoundedIcon />}
+                    color="info"
+                    size="small"
+                    onClick={() => {
+                      toggleDrawer(false)();
+                      handleAnchorClick('channels')();
+                    }}
+                  >
+                    Canais
+                  </Button>
+                  <Button
+                    variant="text"
+                    startIcon={<AdminPanelSettingsRoundedIcon />}
+                    color="info"
+                    size="small"
+                    onClick={() => navigate('/admin')}
+                  >
+                    Administrador
+                  </Button>
+                </List>
+
+                <Divider sx={{ my: 3 }} />
+
+                <Button color="primary" endIcon={<LogoutRoundedIcon />} variant="outlined" fullWidth>
+                  Sair
+                </Button>
               </Box>
-
-              <List>
-                <Button variant="text" startIcon={<HomeRoundedIcon />} color="info" size="small">
-                  Início
-                </Button>
-                <Button variant="text" startIcon={<WhatshotRoundedIcon />} color="info" size="small">
-                  Recomendados
-                </Button>
-                <Button variant="text" startIcon={<LiveTvRoundedIcon />} color="info" size="small">
-                  Canais
-                </Button>
-                <Button variant="text" startIcon={<AdminPanelSettingsRoundedIcon />} color="info" size="small" onClick={() => navigate('/admin')}>
-                  Administrador
-                </Button>
-              </List>
-
-              <Divider sx={{ my: 3 }} />
-
-              <Button color="primary" endIcon={<LogoutRoundedIcon />} variant="outlined" fullWidth>
-                Sair
-              </Button>
-            </Box>
             </Drawer>
           </Box>
         </StyledToolbar>

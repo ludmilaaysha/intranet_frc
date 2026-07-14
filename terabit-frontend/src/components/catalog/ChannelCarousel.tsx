@@ -2,10 +2,15 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
+import CircleIcon from '@mui/icons-material/Circle';
 import { styled } from '@mui/material/styles';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import CardActions from '@mui/material/CardActions';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export interface CarouselItem {
   id: number | string;
@@ -13,6 +18,8 @@ export interface CarouselItem {
   image: string;
   subtitle?: string;
   logo?: string;
+  isLive: boolean;
+  viewers: number;
 }
 
 interface ChannelCarouselProps {
@@ -183,9 +190,36 @@ export default function ChannelCarousel({
             <SlideBox
               key={item.id}
               diff={diff}
-              style={{ backgroundImage: `url(${item.image})` }}
+              sx={(theme) => ({
+                outline: '3px solid',
+                outlineColor: 'transparent',
+                cursor: 'pointer',
+                '&:hover': {
+                  outlineColor: 'hsla(200, 100%, 55%, 0.60)',
+                  boxShadow: '0 0 16px 6px hsla(220, 25%, 80%, 0.35)',
+                  ...theme.applyStyles('dark', {
+                    outlineColor: 'hsla(200, 100%, 65%, 0.50)',
+                    boxShadow: '0 0 24px 10px hsla(210, 100%, 25%, 0.35)',
+                  }),
+                },
+              })}
+              style={{ backgroundImage: `url(${item.image})` 
+            }}
             >
               <Overlay>
+                <Box sx={{ display: 'flex', mb: 1, gap: 1}}>
+                  <Chip
+                    label={item.isLive ? 'Ao vivo' : 'Fora do ar'}
+                    icon={<CircleIcon />}
+                    size="small"
+                    color={item.isLive ? 'error' : 'default'}
+                  />
+                  {item.isLive ? (
+                    <Typography variant="body2" sx={{ size: 12, color: 'rgba(255, 255, 255, 0.5)' }}>
+                      {item.viewers} assistindo
+                    </Typography>
+                  ) : null}
+                </Box>
                 {item.logo ? (
                   <Box
                     component="img"
@@ -196,7 +230,7 @@ export default function ChannelCarousel({
                 ) : (
                   <Typography
                     variant="h5"
-                    sx={{ color: 'white', fontWeight: 700, mb: 0.5, fontSize: '3rem' }}
+                    sx={{ color: 'white', fontWeight: 700, mb: 0.5, fontSize: '3rem', lineHeight: 1.15 }}
                   >
                     {item.title}
                   </Typography>
@@ -209,9 +243,10 @@ export default function ChannelCarousel({
                     {item.subtitle}
                   </Typography>
                 )}
-                {/* {item.live && (
-                  <Button />
-                )} */}
+                <CardActions sx={{marginTop: 2}} >
+                  {item.isLive ? <Button variant='contained' size="small" startIcon={<PlayArrowRoundedIcon /> } >Assistir</Button> : null}
+                  <Button variant='outlined' startIcon={<InfoOutlinedIcon />} size="small">Detalhes</Button>
+                </CardActions>
               </Overlay>
             </SlideBox>
           );

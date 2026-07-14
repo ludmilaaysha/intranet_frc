@@ -170,8 +170,8 @@ export default function DashboardSidebar({
               id="catalog"
               title="Voltar ao catálogo"
               icon={<VideoLibraryRoundedIcon />}
-              href="/catalog"
-              selected={!!matchPath('/catalog/*', pathname)}
+              href="/"
+              selected={!!matchPath('/*', pathname)}
             />
           </List>
         </Box>

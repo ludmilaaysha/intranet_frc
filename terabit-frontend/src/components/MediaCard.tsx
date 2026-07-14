@@ -4,43 +4,84 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import CircleIcon from '@mui/icons-material/Circle';
-import type { Channel } from './../data/channels';
+import Box from '@mui/material/Box';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-export default function MediaCard({ channel }: { channel: Channel }) {
-  const transmitting = channel.status === 'ONLINE';
+export interface MediaCardProps {
+  isLive: boolean;
+  viewers: number;
+  name: string;
+  description: string;
+  imageUrl: string | null;
+}
 
+export default function MediaCard({
+  isLive,
+  viewers,
+  name,
+  description,
+  imageUrl,
+}: MediaCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={(theme) => ({
+        maxWidth: 345,
+        outline: '3px solid',
+        outlineColor: 'transparent',
+        transition:
+          'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), outline-color 0.3s ease, box-shadow 0.3s ease',
+        cursor: 'pointer',
+        '&:hover': {
+          transform: 'scale(1.03)',
+          outlineColor: 'hsla(200, 100%, 55%, 0.60)',
+          boxShadow: '0 0 16px 6px hsla(220, 25%, 80%, 0.35)',
+          ...theme.applyStyles('dark', {
+            outlineColor: 'hsla(200, 100%, 65%, 0.50)',
+            boxShadow: '0 0 24px 10px hsla(210, 100%, 25%, 0.35)',
+          }),
+        },
+      })}
+    >
       <CardMedia
         sx={{ height: 140 }}
-        image={channel.thumbnailUrl ?? '/assets/img/banners/placeholder.jpg'}
-        title={channel.name}
+        image={imageUrl ?? '/assets/img/banners/placeholder.jpg'}
+        title={name}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {channel.name}
-        </Typography>
-        <Stack direction="row" spacing={2} sx={{ alignItems: 'center', mb: 1 }}>
+      <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ display: 'flex', mb: 1, gap: 1 }}>
           <Chip
-            label={transmitting ? 'Ao vivo' : 'Fora do ar'}
+            label={isLive ? 'Ao vivo' : 'Fora do ar'}
             icon={<CircleIcon />}
             size="small"
-            color={transmitting ? 'error' : 'default'}
+            color={isLive ? 'error' : 'default'}
           />
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {transmitting ? `${channel.viewers} espectadores` : null}
+          {isLive ? (
+            <Typography variant="body2" sx={{ size: 12, color: 'rgba(255, 255, 255, 0.5)' }}>
+              {viewers} assistindo
+            </Typography>
+          ) : null}
+        </Box>
+        <Box>
+          <Typography gutterBottom variant="h5" component="div">
+            {name}
           </Typography>
-        </Stack>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {channel.description}
-        </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {description}
+          </Typography>
+        </Box>
       </CardContent>
-      <CardActions>
-        <Button size="small">Assistir</Button>
-        <Button size="small">Detalhes</Button>
+      <CardActions sx={{ marginTop: 2 }}>
+        {isLive ? (
+          <Button variant="contained" size="small" sx={{ width: '100%' }} startIcon={<PlayArrowRoundedIcon />}>
+            Assistir
+          </Button>
+        ) : null}
+        <Button variant="outlined" size="small" sx={{ width: '100%' }} startIcon={<InfoOutlinedIcon />}>
+          Detalhes
+        </Button>
       </CardActions>
     </Card>
   );

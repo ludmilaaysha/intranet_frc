@@ -2,29 +2,28 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Hero from '../components/catalog/Hero';
 import Highlights from '../components/catalog/Highlights';
-import MulticastLAN from '../components/catalog/MulticastWAN';
-import Recommendations from '../components/catalog/Recommendations';
+import MulticastWAN from '../components/catalog/MulticastWAN';
+import Channels from '../components/catalog/Channels';
 import Testimonials from '../components/catalog/Testimonials';
 import FAQ from '../components/catalog/FAQ';
+import ScrollToHash from '../components/ScrollToHash';
 
-export default function MarketingPage() {
+export default function Catalog() {
   return (
     <Container maxWidth="xl" sx={{ py: 5 }}>
-      {/* <div> */}
-        <Hero />
-        {/* <LogoCollection /> */}
-        <MulticastLAN />
-        <Recommendations />
-        <Divider />
-        <Testimonials />
-        <Divider />
-        <Highlights />
-        <Divider />
-        {/* <Pricing /> */}
-        <Divider />
-        <FAQ />
-        <Divider />
-      {/* </div> */}
+      <ScrollToHash />
+      <Hero />
+      {/* <LogoCollection /> */}
+      <MulticastWAN />
+      <Channels />
+      {/* <Divider /> */}
+      {/* <Testimonials />
+      <Divider />
+      <Highlights />
+      <Divider /> */}
+      {/* <Pricing /> */}
+      {/* <Divider />
+      <FAQ /> */}
     </Container>
   );
 }

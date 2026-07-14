@@ -32,7 +32,6 @@ const PageHeaderToolbar = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   gap: theme.spacing(1),
-  // Ensure the toolbar is always on the right side, even after wrapping
   marginLeft: 'auto',
 }));
 
@@ -49,6 +48,43 @@ export interface PageContainerProps extends ContainerProps {
 
 export default function PageContainer(props: PageContainerProps) {
   const { children, breadcrumbs, title, actions = null } = props;
+
+React.useEffect(() => {
+    const original = {
+      paddingRight: document.body.style.getPropertyValue('padding-right'),
+      paddingRightPriority: document.body.style.getPropertyPriority('padding-right'),
+      overflow: document.body.style.getPropertyValue('overflow'),
+      overflowPriority: document.body.style.getPropertyPriority('overflow'),
+    };
+
+    const applyOverrides = () => {
+      if (document.body.style.paddingRight !== '0px') {
+        document.body.style.setProperty('padding-right', '0', 'important');
+      }
+      if (document.body.style.overflow !== 'auto') {
+        document.body.style.setProperty('overflow', 'auto', 'important');
+      }
+    };
+
+    applyOverrides();
+
+    const observer = new MutationObserver(applyOverrides);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+
+    return () => {
+      observer.disconnect();
+      document.body.style.setProperty(
+        'padding-right',
+        original.paddingRight,
+        original.paddingRightPriority
+      );
+      document.body.style.setProperty(
+        'overflow',
+        original.overflow,
+        original.overflowPriority
+      );
+    };
+  }, []);
 
   return (
     <Container sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>

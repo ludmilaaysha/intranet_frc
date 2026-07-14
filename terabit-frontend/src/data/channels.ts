@@ -1,16 +1,17 @@
-// data/channels.ts
 import type { GridFilterModel, GridPaginationModel, GridSortModel } from '@mui/x-data-grid';
 
+// puxar do banco
 export type ChannelCategory =
-  | 'Notícias'
-  | 'Esportes'
-  | 'Filmes'
-  | 'Séries'
-  | 'Documentário'
-  | 'Infantil'
-  | 'Música'
-  | 'Variedades';
+| 'Notícias'
+| 'Esportes'
+| 'Filmes'
+| 'Séries'
+| 'Documentário'
+| 'Infantil'
+| 'Música'
+| 'Variedades';
 
+// puxar do banco
 export const CHANNEL_CATEGORIES: ChannelCategory[] = [
   'Notícias',
   'Esportes',
@@ -114,7 +115,6 @@ export async function getMany({
 
   let filteredChannels = [...channelsStore];
 
-  // Apply filters (example only)
   if (filterModel?.items?.length) {
     filterModel.items.forEach(({ field, value, operator }) => {
       if (!field || value == null) {
@@ -144,7 +144,6 @@ export async function getMany({
     });
   }
 
-  // Apply sorting
   if (sortModel?.length) {
     filteredChannels.sort((a, b) => {
       for (const { field, sort } of sortModel) {

@@ -33,6 +33,7 @@ export default function Hero() {
       })}
     >
       <Container
+        id="home"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -42,6 +43,7 @@ export default function Hero() {
           pb: { xs: 8, sm: 12 },
         }}
       >
+        <ChannelCarousel items={heroItems} />
         <Stack
           spacing={2}
           useFlexGap
@@ -81,7 +83,6 @@ export default function Hero() {
             Canais ao vivo em multicast, adaptados automaticamente à qualidade da sua rede.
           </Typography>
         </Stack>
-        <ChannelCarousel items={heroItems} />
       </Container>
     </Box>
   );
