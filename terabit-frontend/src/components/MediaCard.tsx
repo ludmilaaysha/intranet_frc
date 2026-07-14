@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import CircleIcon from '@mui/icons-material/Circle';
 import Box from '@mui/material/Box';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { watchChannel } from './../api/channels';
 
 export interface MediaCardProps {

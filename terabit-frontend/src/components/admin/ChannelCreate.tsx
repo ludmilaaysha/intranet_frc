@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router';
 import useNotifications from '../../hooks/useNotifications/useNotifications';
+// import { ChannelCategory } from '../../api/channels';
 import {
   createOne as createChannel,
   validate as validateChannel,
@@ -13,9 +14,9 @@ import ChannelForm, {
 import PageContainer from './PageContainer';
 
 const INITIAL_FORM_VALUES = {
-  category: 'Notícias',
+  category: undefined,
   isActive: true,
-  autoStart: true,
+  autoStart: false,
 };
 
 export default function ChannelCreate() {

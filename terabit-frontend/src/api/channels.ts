@@ -4,6 +4,8 @@ import type {
   GridSortModel,
 } from '@mui/x-data-grid';
 
+import { getAccessToken } from './auth';
+
 const API_URL = import.meta.env.VITE_API_URL;
 console.log('API_URL:', API_URL);
 
@@ -75,16 +77,32 @@ export interface ChannelCreateInput {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = getAccessToken();
+
+  const headers = new Headers(init?.headers);
+
+  if (!(init?.body instanceof FormData)) {
+    headers.set('Content-Type', 'application/json');
+  }
+
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
   const response = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    cache: 'no-store',
     ...init,
+    headers,
+    cache: 'no-store',
   });
 
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    const message = body?.message ?? `Erro ${response.status} ao acessar ${path}`;
-    throw new Error(Array.isArray(message) ? message.join(', ') : message);
+    const message =
+      body?.message ?? `Erro ${response.status} ao acessar ${path}`;
+
+    throw new Error(
+      Array.isArray(message) ? message.join(', ') : message,
+    );
   }
 
   if (response.status === 204) {
@@ -198,17 +216,21 @@ export function validate(channel: Partial<Channel>): ValidationResult {
 }
 
 export async function uploadImage(file: File): Promise<string> {
+  const token = getAccessToken();
+
   const formData = new FormData();
   formData.append('file', file);
 
   const response = await fetch(`${API_URL}/channels/upload`, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
     body: formData,
   });
 
   if (!response.ok) {
     const text = await response.text();
-    console.error(text);
     throw new Error(text);
   }
 

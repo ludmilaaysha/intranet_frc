@@ -108,16 +108,6 @@ export default function ChannelForm(props: ChannelFormProps) {
     [onFieldChange],
   );
 
-  const handleNumberFieldChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      onFieldChange(
-        event.target.name as keyof ChannelFormState['values'],
-        Number(event.target.value),
-      );
-    },
-    [onFieldChange],
-  );
-
   const handleCheckboxFieldChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
       onFieldChange(event.target.name as keyof ChannelFormState['values'], checked);

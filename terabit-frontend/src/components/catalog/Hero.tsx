@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import ChannelCarousel, { type CarouselItem } from './ChannelCarousel';
 import * as React from 'react';
 import { getFeatured } from '../../api/channels';
