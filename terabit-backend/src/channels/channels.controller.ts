@@ -21,7 +21,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import type { Response } from 'express';
-import type { Multer } from 'multer';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -67,7 +66,7 @@ export class ChannelsController {
       }),
     }),
   )
-  uploadFile(@UploadedFile() file: Multer.File) {
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
     return {
       url: `/uploads/thumbnails/${file.filename}`,
     };
