@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Patch, Delete, ParseIntPipe, } from
 import { ChannelsService } from './channels.service';
 import { CreateChannelDto } from './dto/create-channel.dto';
 import { UpdateChannelDto } from './dto/update-channel.dto';
+import { HttpCode, HttpStatus } from '@nestjs/common';
 
 @Controller('channels')
 export class ChannelsController {
@@ -33,6 +34,7 @@ export class ChannelsController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.channelsService.remove(id);
   }

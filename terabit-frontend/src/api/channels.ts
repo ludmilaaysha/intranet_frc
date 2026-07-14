@@ -49,10 +49,18 @@ export interface Channel {
   subtitle: string | null;
 }
 
-export type ChannelCreateInput = Omit<
-  Channel,
-  'id' | 'lastBroadcast' | 'viewers' | 'status'
->;
+export interface ChannelCreateInput {
+  name: string;
+  description: string;
+  category: ChannelCategory;
+  thumbnailUrl?: string | null;
+  videoUrl?: string | null;
+  isActive: boolean;
+  autoStart: boolean;
+  featured?: boolean;
+  bannerUrl?: string | null;
+  subtitle?: string | null;
+}
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
@@ -154,25 +162,25 @@ export function validate(channel: Partial<Channel>): ValidationResult {
   } else if (!CHANNEL_CATEGORIES.includes(channel.category)) {
     issues = [...issues, { message: 'Categoria inválida', path: ['category'] }];
   }
-  if (!channel.multicastGroup) {
-    issues = [
-      ...issues,
-      { message: 'Grupo multicast é obrigatório', path: ['multicastGroup'] },
-    ];
-  } else if (!MULTICAST_REGEX.test(channel.multicastGroup)) {
-    issues = [
-      ...issues,
-      {
-        message: 'Endereço multicast inválido (use algo entre 224.0.0.0 e 239.255.255.255)',
-        path: ['multicastGroup'],
-      },
-    ];
-  }
-  if (!channel.port) {
-    issues = [...issues, { message: 'Porta é obrigatória', path: ['port'] }];
-  } else if (channel.port < 1 || channel.port > 65535) {
-    issues = [...issues, { message: 'Porta deve estar entre 1 e 65535', path: ['port'] }];
-  }
+  // if (!channel.multicastGroup) {
+  //   issues = [
+  //     ...issues,
+  //     { message: 'Grupo multicast é obrigatório', path: ['multicastGroup'] },
+  //   ];
+  // } else if (!MULTICAST_REGEX.test(channel.multicastGroup)) {
+  //   issues = [
+  //     ...issues,
+  //     {
+  //       message: 'Endereço multicast inválido (use algo entre 224.0.0.0 e 239.255.255.255)',
+  //       path: ['multicastGroup'],
+  //     },
+  //   ];
+  // }
+  // if (!channel.port) {
+  //   issues = [...issues, { message: 'Porta é obrigatória', path: ['port'] }];
+  // } else if (channel.port < 1 || channel.port > 65535) {
+  //   issues = [...issues, { message: 'Porta deve estar entre 1 e 65535', path: ['port'] }];
+  // }
 
   return { issues };
 }

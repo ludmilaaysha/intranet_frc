@@ -14,8 +14,6 @@ import PageContainer from './PageContainer';
 
 const INITIAL_FORM_VALUES = {
   category: 'Notícias',
-  multicastGroup: 'Será atribuído automaticamente',
-  port: 5004,
   isActive: true,
   autoStart: true,
 };
@@ -75,6 +73,7 @@ export default function ChannelCreate() {
   }, [setFormValues]);
 
   const handleFormSubmit = React.useCallback(async () => {
+    console.log("Entrou no submit");
     const { issues } = validateChannel(formValues);
     if (issues && issues.length > 0) {
       setFormErrors(

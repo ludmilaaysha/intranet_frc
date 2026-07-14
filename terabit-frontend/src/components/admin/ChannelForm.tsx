@@ -66,6 +66,8 @@ export default function ChannelForm(props: ChannelFormProps) {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
+      console.log("SUBMIT");
+
       setIsSubmitting(true);
       try {
         await onSubmit(formValues);
