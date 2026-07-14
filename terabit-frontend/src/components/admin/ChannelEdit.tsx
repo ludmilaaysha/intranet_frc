@@ -9,7 +9,7 @@ import {
   updateOne as updateChannel,
   validate as validateChannel,
   type Channel,
-} from '../../data/channels';
+} from '../../api/channels';
 import ChannelForm, {
   type FormFieldValue,
   type ChannelFormState,

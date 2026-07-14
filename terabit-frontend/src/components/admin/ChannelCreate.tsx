@@ -5,16 +5,16 @@ import {
   createOne as createChannel,
   validate as validateChannel,
   type ChannelCreateInput,
-} from '../../data/channels';
+} from '../../api/channels';
 import ChannelForm, {
   type FormFieldValue,
   type ChannelFormState,
 } from './ChannelForm';
 import PageContainer from './PageContainer';
 
-const INITIAL_FORM_VALUES: Partial<ChannelFormState['values']> = {
+const INITIAL_FORM_VALUES = {
   category: 'Notícias',
-  multicastGroup: '239.10.10.1',
+  multicastGroup: 'Será atribuído automaticamente',
   port: 5004,
   isActive: true,
   autoStart: true,

@@ -20,7 +20,7 @@ import {
   deleteOne as deleteChannel,
   getOne as getChannel,
   type Channel,
-} from '../../data/channels';
+} from '../../api/channels';
 import PageContainer from './PageContainer';
 
 export default function ChannelShow() {

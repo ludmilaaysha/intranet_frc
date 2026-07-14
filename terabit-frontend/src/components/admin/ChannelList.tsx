@@ -27,7 +27,7 @@ import {
   deleteOne as deleteChannel,
   getMany as getChannels,
   type Channel,
-} from '../../data/channels';
+} from '../../api/channels';
 import PageContainer from './PageContainer';
 
 const INITIAL_PAGE_SIZE = 10;

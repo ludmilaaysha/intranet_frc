@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import MediaCard from '../MediaCard';
-import { getMany as getChannels, type Channel } from '../../data/channels';
+import { getMany as getChannels, type Channel } from './../../data/channels';
 
 export default function Channels() {
   const [channels, setChannels] = React.useState<Channel[]>([]);

@@ -20,7 +20,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import ImageIcon from '@mui/icons-material/Image';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
-import { CHANNEL_CATEGORIES, type Channel } from '../../data/channels';
+import { CHANNEL_CATEGORIES, type Channel } from '../../api/channels';
 
 export interface ChannelFormState {
   values: Partial<Omit<Channel, 'id'>>;
@@ -132,7 +132,7 @@ export default function ChannelForm(props: ChannelFormProps) {
   }, [formValues, onReset]);
 
   const handleBack = React.useCallback(() => {
-    navigate(backButtonPath ?? '/admin/channels');
+    navigate(backButtonPath ?? '/admin');
   }, [navigate, backButtonPath]);
 
   return (
@@ -206,7 +206,7 @@ export default function ChannelForm(props: ChannelFormProps) {
               fullWidth
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 6 }} sx={{ display: 'flex' }}>
+          <Grid size={{ xs: 12, sm: 100 }} sx={{ display: 'flex' }}>
             <FormControl error={!!formErrors.category} fullWidth>
               <InputLabel id="channel-category-label">Categoria</InputLabel>
               <Select
@@ -226,31 +226,33 @@ export default function ChannelForm(props: ChannelFormProps) {
               <FormHelperText>{formErrors.category ?? ' '}</FormHelperText>
             </FormControl>
           </Grid>
-          <Grid size={{ xs: 12, sm: 3 }} sx={{ display: 'flex' }}>
+          {/* <Grid size={{ xs: 12, sm: 3 }} sx={{ display: 'flex' }}>
             <TextField
               value={formValues.multicastGroup ?? ''}
-              onChange={handleTextFieldChange}
               name="multicastGroup"
               label="Grupo Multicast"
-              placeholder="239.10.10.1"
-              error={!!formErrors.multicastGroup}
-              helperText={formErrors.multicastGroup ?? ' '}
+              slotProps={{
+                input: {
+                  readOnly: true,
+                },
+              }}
+              helperText="Este endereço será gerado automaticamente quando o canal for criado."
               fullWidth
             />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 3 }} sx={{ display: 'flex' }}>
+          </Grid> */}
+          {/* <Grid size={{ xs: 12, sm: 3 }} sx={{ display: 'flex' }}>
             <TextField
-              type="number"
-              value={formValues.port ?? ''}
-              onChange={handleNumberFieldChange}
-              name="port"
+              value="5004"
               label="Porta"
-              placeholder="5004"
-              error={!!formErrors.port}
-              helperText={formErrors.port ?? ' '}
+              slotProps={{
+                input: {
+                  readOnly: true,
+                },
+              }}
+              helperText="Porta utilizada por todos os canais."
               fullWidth
             />
-          </Grid>
+          </Grid> */}
           <Grid size={{ xs: 12, sm: 6 }} sx={{ display: 'flex' }}>
             <Stack spacing={0.5} sx={{ width: '100%' }}>
               <Button
