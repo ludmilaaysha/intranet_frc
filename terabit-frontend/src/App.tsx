@@ -6,6 +6,7 @@ import MainLayout from './pages/MainLayout';
 import Catalog from './pages/Catalog';
 // import Channel from './pages/Channel';
 import Admin from './pages/Admin';
+import AuthCallback from './components/AuthCallback';
 
 export default function App() {
   return (
@@ -13,9 +14,12 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<SignInSide />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
           <Route element={<ProtectedRoute />}>
-            <Route path="/admin/*" element={<Admin />} />
+            <Route element={<ProtectedRoute requiredRole="admin" />}>
+              <Route path="/admin/*" element={<Admin />} />
+            </Route>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Catalog />} />
               {/* <Route path="/channel/:id" element={<Channel />} /> */}
