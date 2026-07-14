@@ -1,22 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Patch,
-  Delete,
-  ParseIntPipe,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, ParseIntPipe, } from '@nestjs/common';
 import { ChannelsService } from './channels.service';
 import { CreateChannelDto } from './dto/create-channel.dto';
 import { UpdateChannelDto } from './dto/update-channel.dto';
 import { HttpCode, HttpStatus } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
-import { UserRole } from '../auth/auth.types';
 
 @Controller('channels')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -44,8 +30,27 @@ export class ChannelsController {
     return this.channelsService.create(dto);
   }
 
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads/thumbnails',
+        filename: (req, file, cb) => {
+          const unique =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+
+          cb(null, unique + extname(file.originalname));
+        },
+      }),
+    }),
+  )
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    return {
+      url: `/uploads/thumbnails/${file.filename}`,
+    };
+  }
+
   @Patch(':id')
-  @Roles(UserRole.ADMIN)
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateChannelDto) {
     return this.channelsService.update(id, dto);
   }
@@ -55,5 +60,36 @@ export class ChannelsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.channelsService.remove(id);
+  }
+
+  @Post(':id/start')
+  startTransmission(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.channelsService.startTransmission(id);
+  }
+
+  @Post(':id/stop')
+  stopTransmission(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.channelsService.stopTransmission(id);
+  }
+
+  @Get(':id/playlist')
+  async playlist(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ) {
+    const playlist = await this.channelsService.playlist(id);
+
+    res.setHeader('Content-Type', 'audio/x-mpegurl');
+
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="canal-${id}.m3u"`,
+    );
+
+    res.send(playlist);
   }
 }

@@ -20,7 +20,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import ImageIcon from '@mui/icons-material/Image';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
-import { CHANNEL_CATEGORIES, type Channel } from '../../api/channels';
+import { CHANNEL_CATEGORIES, uploadImage, type Channel, startTransmission, stopTransmission, } from '../../api/channels';
 
 export interface ChannelFormState {
   values: Partial<Omit<Channel, 'id'>>;
@@ -39,9 +39,9 @@ export interface ChannelFormProps {
   onReset?: (formValues: Partial<ChannelFormState['values']>) => void;
   submitButtonLabel: string;
   backButtonPath?: string;
-  // Quando informado (modo edição), exibe o bloco somente-leitura com os
-  // dados que vêm do backend/streaming server após a criação do canal.
   streamInfo?: Pick<Channel, 'lastBroadcast' | 'viewers' | 'status'>;
+  channelId?: number;
+  onTransmissionChange?: () => void;
 }
 
 export default function ChannelForm(props: ChannelFormProps) {
@@ -53,6 +53,8 @@ export default function ChannelForm(props: ChannelFormProps) {
     submitButtonLabel,
     backButtonPath,
     streamInfo,
+    channelId,
+    onTransmissionChange,
   } = props;
 
   const formValues = formState.values;
@@ -62,11 +64,29 @@ export default function ChannelForm(props: ChannelFormProps) {
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
+  const handleStartTransmission = React.useCallback(async () => {
+    if (!channelId) return;
+    try {
+      await startTransmission(channelId);
+      onTransmissionChange?.();
+    } catch (err) {
+      alert((err as Error).message);
+    }
+  }, [channelId, onTransmissionChange]);
+
+  const handleStopTransmission = React.useCallback(async () => {
+    if (!channelId) return;
+    try {
+      await stopTransmission(channelId);
+      onTransmissionChange?.();
+    } catch (err) {
+      alert((err as Error).message);
+    }
+  }, [channelId, onTransmissionChange]);
+
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-
-      console.log("SUBMIT");
 
       setIsSubmitting(true);
       try {
@@ -115,14 +135,15 @@ export default function ChannelForm(props: ChannelFormProps) {
     [onFieldChange],
   );
 
-  // TODO(integração backend): hoje só guardamos o nome do arquivo escolhido.
-  // Quando o endpoint de upload existir, trocar por um POST multipart e
-  // salvar a URL retornada em thumbnailUrl / videoUrl.
   const handleFileFieldChange = React.useCallback(
     (fieldName: keyof ChannelFormState['values']) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] ?? null;
-        onFieldChange(fieldName, file ? file.name : null);
+      async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const url = await uploadImage(file);
+
+        onFieldChange(fieldName, url);
       },
     [onFieldChange],
   );
@@ -208,7 +229,7 @@ export default function ChannelForm(props: ChannelFormProps) {
               fullWidth
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 100 }} sx={{ display: 'flex' }}>
+          <Grid size={{ xs: 12, sm: 12 }} sx={{ display: 'flex' }}>
             <FormControl error={!!formErrors.category} fullWidth>
               <InputLabel id="channel-category-label">Categoria</InputLabel>
               <Select
@@ -324,6 +345,28 @@ export default function ChannelForm(props: ChannelFormProps) {
                 }
                 label="Iniciar automaticamente"
               />
+              {channelId && (
+                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    disabled={streamInfo?.status === 'ONLINE'}
+                    onClick={handleStartTransmission}
+                  >
+                    Transmitir
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    disabled={streamInfo?.status === 'OFFLINE'}
+                    onClick={handleStopTransmission}
+                  >
+                    Encerrar
+                  </Button>
+                </Stack>
+              )}
+            {/* </Stack> */}
               <FormHelperText error={!!formErrors.autoStart}>
                 {formErrors.autoStart ?? ' '}
               </FormHelperText>
