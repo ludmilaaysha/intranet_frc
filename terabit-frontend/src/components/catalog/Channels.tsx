@@ -6,13 +6,13 @@ import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import MediaCard from '../MediaCard';
-import { getMany as getChannels, type Channel } from './../../data/channels';
+import { getMany as getChannels, type Channel } from '../../api/channels';
 
 export default function Channels() {
   const [channels, setChannels] = React.useState<Channel[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);
-
+  console.log(channels);
   React.useEffect(() => {
     let active = true;
 
@@ -20,7 +20,7 @@ export default function Channels() {
     setError(null);
 
     getChannels({
-      paginationModel: { page: 0, pageSize: 6 },
+      paginationModel: { page: 0, pageSize: 100 },
       sortModel: [{ field: 'viewers', sort: 'desc' }],
       filterModel: { items: [] },
     })
@@ -82,13 +82,14 @@ export default function Channels() {
           <Grid container spacing={2} sx={{ p: 0 }}>
             {channels.map((channel) => (
             <Grid key={channel.id} size={{ xs: 12, sm: 6, md: 3 }}>
-                <MediaCard
-                  isLive={channel.status === 'ONLINE'}
-                  viewers={channel.viewers}
-                  name={channel.name}
-                  description={channel.description}
-                  imageUrl={channel.thumbnailUrl}
-                />
+              <MediaCard
+                id={channel.id}
+                isLive={channel.status === 'ONLINE'}
+                viewers={channel.viewers}
+                name={channel.name}
+                description={channel.description}
+                imageUrl={`${import.meta.env.VITE_API_URL}${channel.thumbnailUrl}`}
+              />
               </Grid>
             ))}
           </Grid>

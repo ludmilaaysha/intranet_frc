@@ -4,19 +4,36 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import ChannelCarousel, { type CarouselItem } from './ChannelCarousel';
-import espnBanner from '@/assets/img/banners/espn.png';
-import atlFortBanner from '@/assets/img/banners/atl-fortal.png';
-import magnumBanner from '@/assets/img/banners/magnum.png';
-import paradiseBanner from '@/assets/img/banners/paradise.png';
+import * as React from 'react';
+import { getFeatured } from '../../api/channels';
 
-const heroItems: CarouselItem[] = [
-  { id: 1, title: 'ESPN 2026', image: espnBanner, subtitle: 'Copa do Mundo 2026 ao vivo' },
-  { id: 2, title: 'Atlético Goianiense x Fortaleza', image: atlFortBanner },
-  { id: 3, title: 'Magnum', image: magnumBanner },
-  { id: 4, title: 'Paradise', image: paradiseBanner },
-];
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export default function Hero() {
+  const [heroItems, setHeroItems] = React.useState<CarouselItem[]>([]);
+
+  React.useEffect(() => {
+    getFeatured()
+      .then((channels) => {
+        setHeroItems(
+          channels.map((channel) => ({
+            id: channel.id,
+            title: channel.name,
+            subtitle: channel.subtitle ?? channel.description,
+            image: channel.bannerUrl
+              ? `${API_URL}${channel.bannerUrl}`
+              : channel.thumbnailUrl
+                ? `${API_URL}${channel.thumbnailUrl}`
+                : '',
+            isLive: channel.status === 'ONLINE',
+            viewers: channel.viewers,
+          })),
+        );
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <Box
       id="hero"
@@ -43,7 +60,9 @@ export default function Hero() {
           pb: { xs: 8, sm: 12 },
         }}
       >
+      {heroItems.length > 0 && (
         <ChannelCarousel items={heroItems} />
+      )}
         <Stack
           spacing={2}
           useFlexGap

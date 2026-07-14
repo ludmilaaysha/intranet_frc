@@ -19,9 +19,11 @@ import PageContainer from './PageContainer';
 function ChannelEditForm({
   channel,
   onSubmit,
+  onTransmissionChange,
 }: {
   channel: Channel;
   onSubmit: (formValues: Partial<ChannelFormState['values']>) => Promise<void>;
+  onTransmissionChange: () => void;
 }) {
   const { channelId } = useParams();
   const navigate = useNavigate();
@@ -115,11 +117,13 @@ function ChannelEditForm({
       onReset={handleFormReset}
       submitButtonLabel="Salvar"
       backButtonPath={`/admin/channels/${channelId}`}
+      channelId={Number(channelId)}
       streamInfo={{
         lastBroadcast: channel.lastBroadcast,
         viewers: channel.viewers,
         status: channel.status,
       }}
+      onTransmissionChange={onTransmissionChange}
     />
   );
 }
@@ -184,7 +188,7 @@ export default function ChannelEdit() {
     }
 
     return channel ? (
-      <ChannelEditForm channel={channel} onSubmit={handleSubmit} />
+      <ChannelEditForm channel={channel} onSubmit={handleSubmit} onTransmissionChange={loadData} />
     ) : null;
   }, [isLoading, error, channel, handleSubmit]);
 

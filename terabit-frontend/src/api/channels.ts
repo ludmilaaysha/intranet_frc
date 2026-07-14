@@ -30,6 +30,18 @@ export const CHANNEL_CATEGORIES: ChannelCategory[] = [
 
 export type ChannelStatus = 'ONLINE' | 'OFFLINE';
 
+export async function startTransmission(channelId: number) {
+  return request(`/channels/${channelId}/start`, {
+    method: 'POST',
+  });
+}
+
+export async function stopTransmission(channelId: number) {
+  return request(`/channels/${channelId}/stop`, {
+    method: 'POST',
+  });
+}
+
 export interface Channel {
   id: number;
   name: string;
@@ -146,7 +158,7 @@ export async function deleteOne(channelId: number): Promise<void> {
 
 type ValidationResult = { issues: { message: string; path: (keyof Channel)[] }[] };
 
-const MULTICAST_REGEX = /^(22[4-9]|23[0-9])\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+// const MULTICAST_REGEX = /^(22[4-9]|23[0-9])\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 
 export function validate(channel: Partial<Channel>): ValidationResult {
   let issues: ValidationResult['issues'] = [];
@@ -183,4 +195,29 @@ export function validate(channel: Partial<Channel>): ValidationResult {
   // }
 
   return { issues };
+}
+
+export async function uploadImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${API_URL}/channels/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    console.error(text);
+    throw new Error(text);
+  }
+
+  const data = await response.json();
+
+  return data.url;
+}
+
+export function watchChannel(channelId: number) {
+  window.location.href =
+    `${API_URL}/channels/${channelId}/playlist`;
 }

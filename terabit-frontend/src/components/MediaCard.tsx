@@ -9,6 +9,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import Box from '@mui/material/Box';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { watchChannel } from './../api/channels';
 
 export interface MediaCardProps {
   isLive: boolean;
@@ -16,15 +17,21 @@ export interface MediaCardProps {
   name: string;
   description: string;
   imageUrl: string | null;
+  id: number;
 }
 
 export default function MediaCard({
+  id,
   isLive,
   viewers,
   name,
   description,
   imageUrl,
 }: MediaCardProps) {
+  const handleWatch = () => {
+    watchChannel(id);
+  };
+
   return (
     <Card
       sx={(theme) => ({
@@ -47,10 +54,10 @@ export default function MediaCard({
     >
       <CardMedia
         sx={{ height: 140 }}
-        image={imageUrl ?? '/assets/img/banners/placeholder.jpg'}
+        image={imageUrl || '/images/placeholder.jpg'}
         title={name}
       />
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
         <Box sx={{ display: 'flex', mb: 1, gap: 1 }}>
           <Chip
             label={isLive ? 'Ao vivo' : 'Fora do ar'}
@@ -65,23 +72,29 @@ export default function MediaCard({
           ) : null}
         </Box>
         <Box>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography noWrap gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
             {description}
           </Typography>
         </Box>
       </CardContent>
       <CardActions sx={{ marginTop: 2 }}>
         {isLive ? (
-          <Button variant="contained" size="small" sx={{ width: '100%' }} startIcon={<PlayArrowRoundedIcon />}>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{ width: '100%' }}
+            startIcon={<PlayArrowRoundedIcon />}
+            onClick={handleWatch}
+          >
             Assistir
           </Button>
         ) : null}
-        <Button variant="outlined" size="small" sx={{ width: '100%' }} startIcon={<InfoOutlinedIcon />}>
+        {/* <Button variant="outlined" size="small" sx={{ width: '100%' }} startIcon={<InfoOutlinedIcon />}>
           Detalhes
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
   );
