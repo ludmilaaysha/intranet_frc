@@ -13,7 +13,7 @@ async function bootstrap() {
   });
 
   app.enableCors({
-    origin: config.get<string>('FRONTEND_URL', 'http://localhost:5173'),
+    origin: config.get<string>('FRONTEND_URL', 'http://172.16.0.1'),
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));

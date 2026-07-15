@@ -12,7 +12,7 @@ async function bootstrap() {
         prefix: '/uploads/',
     });
     app.enableCors({
-        origin: config.get('FRONTEND_URL', 'http://localhost:5173'),
+        origin: config.get('FRONTEND_URL', 'http://172.16.0.1'),
         credentials: true,
     });
     app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, transform: true }));
