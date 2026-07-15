@@ -2,11 +2,11 @@
 
 ## frontend
 
-VITE_API_URL=/api
+``VITE_API_URL=/api``
 
 ## backend
 
-DB_HOST=localhost
+```DB_HOST=localhost
 DB_PORT=5432
 DB_USER=admin
 DB_PASSWORD=admin123
@@ -28,4 +28,4 @@ OAUTH_SCOPES=openid profile email
 OAUTH_LOGOUT_URL=http://172.16.0.2:8080/realms/terabit/protocol/openid-connect/logout
 
 FRONTEND_URL=http://172.16.0.1
-PORT=3000
+PORT=3000```
