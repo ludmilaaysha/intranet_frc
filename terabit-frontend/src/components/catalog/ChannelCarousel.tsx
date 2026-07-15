@@ -10,7 +10,6 @@ import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRound
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import CardActions from '@mui/material/CardActions';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export interface CarouselItem {
   id: number | string;

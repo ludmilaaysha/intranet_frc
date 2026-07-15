@@ -14,12 +14,12 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColorModeIconDropdown from './../shared-theme/ColorModeIconDropdown';
 import { SitemarkIcon } from './CustomIcons';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
+// import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import List from '@mui/material/List';
-import CastConnectedRoundedIcon from '@mui/icons-material/CastConnectedRounded';
+// import CastConnectedRoundedIcon from '@mui/icons-material/CastConnectedRounded';
 import { useAuth } from "../context/AuthContext";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -51,10 +51,10 @@ export default function AppAppBar() {
     navigate(`#${sectionId}`);
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate("/");
+  // };
 
   return (
     <AppBar

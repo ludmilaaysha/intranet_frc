@@ -13,7 +13,7 @@ import DashboardSidebarPageItem from './DashboardSidebarPageItem';
 import DashboardSidebarDividerItem from './DashboardSidebarDividerItem';
 import getDrawerSxTransitionMixin from '../../pages/mixins';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
-import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
+// import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import VideoLibraryRoundedIcon from '@mui/icons-material/VideoLibraryRounded';
 
 export interface DashboardSidebarProps {

@@ -6,7 +6,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [token, setToken] = useState<string | null>(
+  // const [token, setToken] = useState<string | null>(
+  const [token] = useState<string | null>(
       consumeCallbackToken() ?? getAccessToken()
   );
   const [isLoading, setIsLoading] = useState(Boolean(token));
