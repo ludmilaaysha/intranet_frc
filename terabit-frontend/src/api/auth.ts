@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL ?? "172.16.0.2:3000";
 const TOKEN_KEY = "terabit_access_token";
 const ID_TOKEN_KEY = "terabit_id_token";
 
