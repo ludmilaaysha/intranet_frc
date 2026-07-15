@@ -1,0 +1,42 @@
+.MuiContainer-root.MuiContainer-maxWidthXl.css-wbcffw-MuiContainer-root {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media (min-width: 600px) {
+    .MuiContainer-root.MuiContainer-maxWidthLg.css-1lma2x1-MuiContainer-root {
+        padding-top: calc(14 * var(--template-spacing));
+        padding-bottom: 0;
+      }
+      
+      .MuiContainer-root.MuiContainer-maxWidthLg.css-1d7bc7x-MuiContainer-root{
+        padding-top: calc(4 * var(--template-spacing));
+        padding-bottom: calc(4 * var(--template-spacing));
+    }
+}
+
+.MuiStack-root.css-1hiqrai-MuiStack-root{ 
+  margin: 0;
+  margin-top:0;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+#root {
+  overflow: hidden;
+  min-height: 100%;
+  width: 100%;
+}
+
+.MuiBox-root.css-1wkuh0g {
+  height: 100vh;
+}
+
+.MuiBox-root.css-1il828s{
+  position: sticky;
+  top: 0;
+}
