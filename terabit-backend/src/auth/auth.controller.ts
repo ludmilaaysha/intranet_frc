@@ -50,13 +50,16 @@ export class AuthController {
       throw new UnauthorizedException('Retorno OAuth2 invalido');
     }
     response.clearCookie(STATE_COOKIE, { path: '/auth/callback' });
-    const accessToken = await this.authService.authenticate(code);
+    const { accessToken, idToken } =
+      await this.authService.authenticate(code);
     const frontendUrl = this.config.get<string>(
       'FRONTEND_URL',
       'http://localhost:5173',
     );
     return response.redirect(
-      `${frontendUrl}/auth/callback#access_token=${encodeURIComponent(accessToken)}`,
+      `${frontendUrl}/auth/callback` +
+        `#access_token=${encodeURIComponent(accessToken)}` +
+        `&id_token=${encodeURIComponent(idToken)}`,
     );
   }
 
@@ -64,6 +67,23 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   me(@Req() request: AuthenticatedRequest) {
     return request.user;
+  }
+
+  @Get("logout")
+  logout(
+    @Query("id_token") idToken: string,
+    @Res() response: Response,
+  ) {
+
+    const logoutUrl =
+      this.config.getOrThrow<string>("OAUTH_LOGOUT_URL");
+
+    const frontendUrl =
+      this.config.getOrThrow<string>("FRONTEND_URL");
+
+    return response.redirect(
+      `${logoutUrl}?id_token_hint=${encodeURIComponent(idToken)}&post_logout_redirect_uri=${encodeURIComponent(frontendUrl)}`,
+    );
   }
 
   private validState(received?: string, expected?: string): boolean {

@@ -158,13 +158,13 @@ export default function DashboardSidebar({
                 !!matchPath('/admin/channels/*', pathname) || pathname === '/admin'
               }
             />
-            <DashboardSidebarPageItem
+            {/* <DashboardSidebarPageItem
               id="users"
               title="Usuários"
               icon={<GroupsRoundedIcon />}
               href="/admin/users"
               selected={!!matchPath('/admin/users/*', pathname)}
-            />
+            /> */}
             <DashboardSidebarDividerItem />
             <DashboardSidebarPageItem
               id="catalog"

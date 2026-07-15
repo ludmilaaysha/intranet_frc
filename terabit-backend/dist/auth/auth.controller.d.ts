@@ -9,6 +9,7 @@ export declare class AuthController {
     login(response: Response): void;
     callback(code: string, state: string, request: Request, response: Response): Promise<void>;
     me(request: AuthenticatedRequest): import("./auth.types").AuthenticatedUser;
+    logout(idToken: string, response: Response): void;
     private validState;
     private readCookie;
 }

@@ -43,12 +43,19 @@ let AuthController = class AuthController {
             throw new common_1.UnauthorizedException('Retorno OAuth2 invalido');
         }
         response.clearCookie(STATE_COOKIE, { path: '/auth/callback' });
-        const accessToken = await this.authService.authenticate(code);
+        const { accessToken, idToken } = await this.authService.authenticate(code);
         const frontendUrl = this.config.get('FRONTEND_URL', 'http://localhost:5173');
-        return response.redirect(`${frontendUrl}/auth/callback#access_token=${encodeURIComponent(accessToken)}`);
+        return response.redirect(`${frontendUrl}/auth/callback` +
+            `#access_token=${encodeURIComponent(accessToken)}` +
+            `&id_token=${encodeURIComponent(idToken)}`);
     }
     me(request) {
         return request.user;
+    }
+    logout(idToken, response) {
+        const logoutUrl = this.config.getOrThrow("OAUTH_LOGOUT_URL");
+        const frontendUrl = this.config.getOrThrow("FRONTEND_URL");
+        return response.redirect(`${logoutUrl}?id_token_hint=${encodeURIComponent(idToken)}&post_logout_redirect_uri=${encodeURIComponent(frontendUrl)}`);
     }
     validState(received, expected) {
         if (!received || !expected)
@@ -92,6 +99,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "me", null);
+__decorate([
+    (0, common_1.Get)("logout"),
+    __param(0, (0, common_1.Query)("id_token")),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

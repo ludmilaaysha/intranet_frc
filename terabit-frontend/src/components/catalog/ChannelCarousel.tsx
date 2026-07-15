@@ -245,7 +245,7 @@ export default function ChannelCarousel({
                 )}
                 <CardActions sx={{marginTop: 2}} >
                   {item.isLive ? <Button variant='contained' size="small" startIcon={<PlayArrowRoundedIcon /> } >Assistir</Button> : null}
-                  <Button variant='outlined' startIcon={<InfoOutlinedIcon />} size="small">Detalhes</Button>
+                  {/* <Button variant='outlined' startIcon={<InfoOutlinedIcon />} size="small">Detalhes</Button> */}
                 </CardActions>
               </Overlay>
             </SlideBox>

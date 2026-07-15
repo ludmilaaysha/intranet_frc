@@ -20,6 +20,7 @@ import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSetting
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import List from '@mui/material/List';
 import CastConnectedRoundedIcon from '@mui/icons-material/CastConnectedRounded';
+import { useAuth } from "../context/AuthContext";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -38,16 +39,21 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function AppAppBar() {
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
-  const navigate = useNavigate();
-
   const handleAnchorClick = (sectionId: string) => () => {
     navigate(`#${sectionId}`);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -93,15 +99,17 @@ export default function AppAppBar() {
               >
                 Canais
               </Button>
-              <Button
-                variant="text"
-                startIcon={<AdminPanelSettingsRoundedIcon />}
-                color="info"
-                size="small"
-                onClick={() => navigate('/admin')}
-              >
-                Administrador
-              </Button>
+              {user?.role === "admin" && (
+                <Button
+                  variant="text"
+                  startIcon={<AdminPanelSettingsRoundedIcon />}
+                  color="info"
+                  size="small"
+                  onClick={() => navigate('/admin')}
+                >
+                  Administrador
+                </Button>
+              )}
             </Box>
           </Box>
           <Box
@@ -111,9 +119,15 @@ export default function AppAppBar() {
               alignItems: 'center',
             }}
           >
-            <Button color="primary" variant="contained" endIcon={<LogoutRoundedIcon />} size="small">
-              Sair
-            </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            endIcon={<LogoutRoundedIcon />}
+            size="small"
+            onClick={logout}
+          >
+            Sair
+          </Button>
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
@@ -153,7 +167,7 @@ export default function AppAppBar() {
                   >
                     Início
                   </Button>
-                  <Button
+                  {/* <Button
                     variant="text"
                     startIcon={<CastConnectedRoundedIcon />}
                     color="info"
@@ -164,10 +178,10 @@ export default function AppAppBar() {
                     }}
                   >
                     WAN
-                  </Button>
-                  <Button variant="text" startIcon={<WhatshotRoundedIcon />} color="info" size="small">
+                  </Button> */}
+                  {/* <Button variant="text" startIcon={<WhatshotRoundedIcon />} color="info" size="small">
                     Recomendados
-                  </Button>
+                  </Button> */}
                   <Button
                     variant="text"
                     startIcon={<LiveTvRoundedIcon />}
@@ -180,20 +194,22 @@ export default function AppAppBar() {
                   >
                     Canais
                   </Button>
-                  <Button
-                    variant="text"
-                    startIcon={<AdminPanelSettingsRoundedIcon />}
-                    color="info"
-                    size="small"
-                    onClick={() => navigate('/admin')}
-                  >
-                    Administrador
-                  </Button>
+                  {user?.role === "admin" && (
+                    <Button
+                      variant="text"
+                      startIcon={<AdminPanelSettingsRoundedIcon />}
+                      color="info"
+                      size="small"
+                      onClick={() => navigate("/admin")}
+                    >
+                      Administrador
+                    </Button>
+                  )}
                 </List>
 
                 <Divider sx={{ my: 3 }} />
 
-                <Button color="primary" endIcon={<LogoutRoundedIcon />} variant="outlined" fullWidth>
+                <Button color="primary" endIcon={<LogoutRoundedIcon />} variant="outlined" fullWidth onClick={logout}>
                   Sair
                 </Button>
               </Box>

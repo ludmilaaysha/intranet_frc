@@ -34,7 +34,9 @@ let AuthService = class AuthService {
     async exchangeCode(code) {
         const response = await fetch(this.config.getOrThrow('OAUTH_TOKEN_URL'), {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
             body: new URLSearchParams({
                 grant_type: 'authorization_code',
                 code,
@@ -43,12 +45,17 @@ let AuthService = class AuthService {
                 redirect_uri: this.config.getOrThrow('OAUTH_CALLBACK_URL'),
             }),
         });
-        if (!response.ok)
-            throw new common_1.BadGatewayException('Falha ao trocar o codigo OAuth2');
+        if (!response.ok) {
+            throw new common_1.BadGatewayException('Falha ao trocar o código OAuth2');
+        }
         const body = (await response.json());
-        if (!body.access_token)
-            throw new common_1.BadGatewayException('Token ausente na resposta OAuth2');
-        return body.access_token;
+        if (!body.access_token || !body.id_token) {
+            throw new common_1.BadGatewayException('Tokens ausentes na resposta OAuth2');
+        }
+        return {
+            accessToken: body.access_token,
+            idToken: body.id_token,
+        };
     }
 };
 exports.AuthService = AuthService;
