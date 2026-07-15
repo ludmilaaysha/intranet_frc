@@ -16,7 +16,13 @@ async function bootstrap() {
     origin: config.get<string>('FRONTEND_URL', 'http://172.16.0.1'),
     credentials: true,
   });
+
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  await app.listen(config.get<number>('PORT', 3000));
+  app.setGlobalPrefix('api');
+
+  const port = config.get<number>('PORT', 3000);
+  await app.listen(port, '0.0.0.0');
+
+  console.log('Backend: http://172.16.0.2:${port}/api');
 }
 void bootstrap();
